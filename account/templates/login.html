@@ -5,6 +5,20 @@
 
 {%block body %}
 
-Log in User
+{% load crispy_forms_tags %} 
+
+{% include 'messages.html' %}
+
+
+<div class="login_form">
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ login_form|crispy}}
+        <br>
+        <button type="submit" class="btn btn-outline-dark">Login</button>
+    </form>
+    <p class="text-center">Don't have an account? <a href="{% url 'register' %}">Create an account</a>.</p>
+</div>
 
 {% endblock %}
