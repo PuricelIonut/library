@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name='home'),
     path('', include('shelf.urls')),
+    path('user/', include('account.urls')),
 ]
