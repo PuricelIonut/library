@@ -17,15 +17,22 @@
             </button>
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                 <div class="offcanvas-header">
-                    <h3 class="offcanvas-title" id="offcanvasExampleLabel">Hello User,</h3>
+                    {% if user.is_authenticated %}
+                    <h3 class="offcanvas-title" id="offcanvasExampleLabel">Hello {{ user.username }},</h3>
+                    {% else %}
+                    <h3 class="offcanvas-title" id="offcanvasExampleLabel">Hello Visitor,</h3>
+                    {% endif %}
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <div>
-                        <h4><a href="{% url 'register' %}">Register</a></h4>
-                        <h4><a href="{% url 'login' %}">Login</a></h4>
+                        {% if user.is_authenticated %}
                         <h4><a href="{% url 'change_password' %}">Change Password</a></h4>
                         <h4><a href="{% url 'logout' %}">Logout</a></h4>
+                        {% else %}
+                        <h4><a href="{% url 'register' %}">Register</a></h4>
+                        <h4><a href="{% url 'login' %}">Login</a></h4>
+                        {% endif %}    
                     </div>
                 </div>
             </div>
