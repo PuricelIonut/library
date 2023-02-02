@@ -13,6 +13,7 @@ def register_view(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
+            form.clean()
             user = form.save()
             login(request, user)
             messages.success(request, 'User created succesfully!')
@@ -32,10 +33,10 @@ def login_view(request):
             user = authenticate(username = username, password = password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f'You are now logged in as {username}')
+                messages.info(request, f'You are logged in as { request.user.first_name }')
                 return redirect('home')
-            else:
-                messages.error(request, f'Invalid username or password')
+        else:
+            messages.error(request, f'Invalid username or password')
     form = AuthenticationForm()
     return render(request, 'login.html', context={'login_form': form})
 

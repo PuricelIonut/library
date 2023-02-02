@@ -21,7 +21,7 @@
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                 <div class="offcanvas-header">
                     {% if user.is_authenticated %}
-                    <h3 class="offcanvas-title" id="offcanvasExampleLabel">Hello {{ user.username }},</h3>
+                    <h3 class="offcanvas-title" id="offcanvasExampleLabel">Hello {{ user.first_name }},</h3>
                     {% else %}
                     <h3 class="offcanvas-title" id="offcanvasExampleLabel">Hello Visitor,</h3>
                     {% endif %}
@@ -46,15 +46,5 @@
 
     {% endblock %}
     
-    <script>
-        setTimeout(function(){
-            if ($('#msg').length > 0)
-            {
-                $('#msg').remove();
-            }
-        }, 2000)
-    </script>
-
-
 </body>
 </html>

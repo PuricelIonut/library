@@ -55,6 +55,8 @@ INSTALLED_APPS = [
 # Custom settings
 
 AUTH_USER_MODEL = 'account.CustomUserModel'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
