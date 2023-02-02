@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as messages
 import environ
 
 env = environ.Env()
@@ -51,11 +52,19 @@ INSTALLED_APPS = [
     # Format
     'crispy_forms'
 ]
+# Custom settings
 
 AUTH_USER_MODEL = 'account.CustomUserModel'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+LOGIN_URL = '/user/login'
+
+MESSAGE_TAGS = {
+    messages.ERROR : 'danger'
+}
+
+# End of custom settings
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -120,7 +129,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_URL = '/user/login'
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
