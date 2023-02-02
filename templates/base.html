@@ -15,17 +15,17 @@
     <nav id="nav" class="navbar navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Library</a>
-            <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark" aria-controls="offcanvasDark">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDark" aria-labelledby="offcanvasDarLabel">
                 <div class="offcanvas-header">
                     {% if user.is_authenticated %}
-                    <h3 class="offcanvas-title" id="offcanvasExampleLabel">Hello {{ user.first_name }},</h3>
+                    <h3 class="offcanvas-title" id="offcanvasDarkLabel">Hello {{ user.first_name }},</h3>
                     {% else %}
-                    <h3 class="offcanvas-title" id="offcanvasExampleLabel">Hello Visitor,</h3>
+                    <h3 class="offcanvas-title" id="offcanvasDarkLabel">Hello Visitor,</h3>
                     {% endif %}
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <div>
