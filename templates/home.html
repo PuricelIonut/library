@@ -6,12 +6,15 @@
 
 {% include 'messages.html' %}
 
+{% load static %}
+<link rel="stylesheet" href="{% static 'homepage/style.css' %}">
 
-<div>
+<div class="searchbar-container">
+<div class="searchbar">
     <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control me-2" type="search" placeholder="Enter name of the book..." aria-label="Search">
         <button hidden type="submit"></button>
     </form>
 </div>
-
+</div>
 {% endblock %}
