@@ -1,8 +1,24 @@
 {% if messages %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
     {% for message in messages %}
-    <div style='width:30%' class='alert alert-{{ message.tags }} alert-dismissible fade show' id ='msg' role="alert">
+    <div class='alert alert-{{ message.tags }} alert-dismissible fade show' id ='msg' role="alert">
         {{ message }}
-    <button type="button" class="btn-close btn btn-outline-{{ message.tags }}" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     {% endfor %}
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+         
+        window.setTimeout(function() {
+            $("#msg").fadeTo(1000, 0).slideUp(1000, function(){
+                $(this).remove(); 
+            });
+        }, 2200);
+         
+        });
+    </script>
+
 {% endif %}

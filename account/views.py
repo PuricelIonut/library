@@ -48,8 +48,8 @@ def change_password_view(request):
         form = PasswordChangeForm(user, request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Password changed succesfully!')
-            return redirect('login')
+            messages.success(request, 'Password changed succesfully! Please login again.')
+            return redirect('home')
         else:
             messages.error(request, 'Invalid password')
     form = PasswordChangeForm(user)

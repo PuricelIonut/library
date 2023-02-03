@@ -6,12 +6,13 @@
     height: 6rem;
 }
 
-.searchbar {
+#searchbar {
     width: 40%;
+    height:3rem;
     margin: auto;
 }
 
 .offcanvas-items a {
     color:white;
     text-decoration: none;
-}   
+}

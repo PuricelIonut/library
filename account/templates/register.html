@@ -9,15 +9,19 @@
 
 {% include 'messages.html' %}
 
-<div class="register_form">
+{% load static %}
 
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<div class="register-container">
     <form action="" method="POST">
         {% csrf_token %}
         {{ register_form|crispy}}
-        <br>
+        <div class="register-button">
         <button type="submit" class="btn btn-outline-dark">Register</button>
+        </div>
+        <p class="text-center">Already have an account? <a href="{% url 'login' %}">Login</a> instead.</p>
     </form>
-    <p class="text-center">If you already have an account, <a href="{% url 'login' %}">login</a> instead.</p>
 </div>
 
 {% endblock %}
