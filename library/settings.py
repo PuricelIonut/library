@@ -55,17 +55,25 @@ INSTALLED_APPS = [
 ]
 # Custom settings
 
+# Change default user model
 AUTH_USER_MODEL = 'account.CustomUserModel'
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 
+# For crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+# For login_required decorator
 LOGIN_URL = '/user/login'
 
+# Change message tag to match bootstrap
 MESSAGE_TAGS = {
     messages.ERROR : 'danger'
 }
+
+# SMTP SERVER
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
 # End of custom settings
 
