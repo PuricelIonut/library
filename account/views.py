@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 
-from .forms import UserRegisterForm, ResetPasswordForm
+from .forms import UserRegisterForm
 from .decorators import user_not_authenticated
 
 
@@ -60,13 +60,3 @@ def change_password_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
-
-
-@user_not_authenticated
-def reset_password_view(request):
-    if request.method == 'POST':
-        form = ResetPasswordForm(request.POST)
-        if form.is_valid():
-            pass
-    form = ResetPasswordForm()
-    return render(request, 'reset-password.html', context={'reset_password': form})

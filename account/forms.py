@@ -8,7 +8,3 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = CustomUserModel
         fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
-
-
-class ResetPasswordForm(forms.Form):
-    email = forms.EmailField(label='Enter your email address:', required=True)

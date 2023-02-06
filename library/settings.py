@@ -53,29 +53,6 @@ INSTALLED_APPS = [
     # Format
     'crispy_forms'
 ]
-# Custom settings
-
-# Change default user model
-AUTH_USER_MODEL = 'account.CustomUserModel'
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_USERNAME_REQUIRED = False
-
-# For crispy forms
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-# For login_required decorator
-LOGIN_URL = '/user/login'
-
-# Change message tag to match bootstrap
-MESSAGE_TAGS = {
-    messages.ERROR : 'danger'
-}
-
-# SMTP SERVER
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
-
-# End of custom settings
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -165,3 +142,28 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Custom settings
+
+# Change default user model
+AUTH_USER_MODEL = 'account.CustomUserModel'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
+
+# For crispy forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# For login_required decorator
+LOGIN_URL = '/user/login'
+
+# Change message tag to match bootstrap
+MESSAGE_TAGS = {
+    messages.ERROR : 'danger'
+}
+
+# SMTP SERVER
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+
+# End of custom settings

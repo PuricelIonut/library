@@ -20,6 +20,7 @@
             {{ login_form|crispy}}
             <button type="submit" class="btn btn-outline-dark">Login</button>
             <p class="text-center">Don't have an account? <a href="{% url 'register' %}">Create an account</a>.</p>
+            <a href="{% url 'reset_password' %}">Forgot your password?</a>
         </form>
 </div>
 
