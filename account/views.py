@@ -60,3 +60,7 @@ def change_password_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+
+def not_found_view(request):
+    return render(request, 'templates/404.html', context={})
