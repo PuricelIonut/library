@@ -14,6 +14,5 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='account/templates/reset-password/reset-password-confirm.html'), name='password_reset_confirm'),
     path('reset-password-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='account/templates/reset-password/reset-password-complete.html'), name='password_reset_complete'),
 
-    # 404
-    path('404/', not_found_view, name='not_found'),
 ]
+

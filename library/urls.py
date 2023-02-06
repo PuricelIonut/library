@@ -24,3 +24,5 @@ urlpatterns = [
     path('', include('shelf.urls')),
     path('user/', include('account.urls')),
 ]
+
+handler404 = 'account.views.not_found_view'

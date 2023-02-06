@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 
 from .forms import UserRegisterForm
 from .decorators import user_not_authenticated
@@ -62,5 +63,5 @@ def logout_view(request):
     return redirect('home')
 
 
-def not_found_view(request):
-    return render(request, 'templates/404.html', context={})
+def not_found_view(request, exception):
+    return render(request, 'templates/404.html')
