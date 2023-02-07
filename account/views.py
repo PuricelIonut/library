@@ -62,5 +62,5 @@ def logout_view(request):
     return redirect('home')
 
 
-def not_found_view(request):
+def not_found_view(request, exception):
     return render(request, 'templates/404.html', context={})
