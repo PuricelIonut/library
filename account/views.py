@@ -3,7 +3,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
 
 from .forms import UserRegisterForm
 from .decorators import user_not_authenticated
