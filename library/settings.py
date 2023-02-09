@@ -165,5 +165,8 @@ MESSAGE_TAGS = {
 # SMTP SERVER
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+EMAIL_USE_TLS = True
+
+PASSWORD_RESET_TIMEOUT = 1800
 
 # End of custom settings
