@@ -16,11 +16,12 @@
 
 <div class="login-container">
         <form class='login-form' action="" method="POST">
+            <h3 class="display-6">Login</h3><hr>
             {% csrf_token %}
             {{ login_form|crispy}}
             <button type="submit" class="btn btn-outline-dark">Login</button>
-            <p class="text-center">Don't have an account? <a href="{% url 'register' %}">Create an account</a>.</p>
-            <a href="#">Forgot your password?</a>
+            <a href="{% url 'register' %}">Don't have an account?</a>
+            <a href="{% url 'password_reset' %}">Forgot your password?</a>
         </form>
 </div>
 
