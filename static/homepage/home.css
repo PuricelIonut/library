@@ -11,3 +11,8 @@
     height:3rem;
     margin: auto;
 }
+
+.d-flex .p-2 {
+    background-color: pink;
+    width: 100%;
+}

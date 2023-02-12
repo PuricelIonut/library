@@ -11,9 +11,47 @@
 
 <div class="searchbar-container">
     <form id='searchbar' class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Enter name of the book..." aria-label="Search">
+        <input class="form-control me-2" type="search" placeholder="Enter book name..." aria-label="Search">
         <button hidden type="submit"></button>
     </form>
 </div>
+<hr>
+
+
+<div class="d-flex p-2">
+    <div id="genres-container">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-dark"><b>Genres</b></li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
+                <label class="form-check-label" for="firstCheckbox">Fiction</label>
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox">
+                <label class="form-check-label" for="secondCheckbox">Crime</label>
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
+                <label class="form-check-label" for="thirdCheckbox">Mistery</label>
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
+                <label class="form-check-label" for="thirdCheckbox">Science</label>
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
+                <label class="form-check-label" for="thirdCheckbox">Education</label>
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
+                <label class="form-check-label" for="thirdCheckbox">Action</label>
+            </li>
+        </ul>
+    </div>
+    <div id="books-container">
+        <h1>Books Search Zone</h1>
+    </div>
+</div>
+
 
 {% endblock %}
