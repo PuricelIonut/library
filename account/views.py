@@ -142,8 +142,6 @@ def password_reset_view(request):
                     messages.error(request, 'There was a problem sending the reset password email.')
             else:
                 messages.error(request, 'The email provided does not match an active user.')
-            
-            return redirect('home')
     form = PasswordResetForm()
     return render(request, 'reset-password.html', {'form': form})
 
