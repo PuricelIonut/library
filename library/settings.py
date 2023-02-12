@@ -167,6 +167,7 @@ EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 EMAIL_USE_TLS = True
 
-PASSWORD_RESET_TIMEOUT = 900
+# Time limit for token usage 
+PASSWORD_RESET_TIMEOUT = 900 # 15 mins
 
 # End of custom settings
