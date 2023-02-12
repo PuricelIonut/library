@@ -12,7 +12,6 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.safestring import mark_safe
 
 
-
 from .forms import UserRegisterForm
 from .decorators import user_not_authenticated
 from .tokens import account_activation_token
@@ -26,7 +25,7 @@ def register_view(request):
             user = form.save(commit=False)
             user.is_active=False
             user.save()
-            activateEmail(request, user, form.cleaned_data.get('email'))
+            activate_email(request, user, form.cleaned_data.get('email'))
             return redirect('home')
         else:
             messages.error(request, mark_safe('<b>Invalid</b> credentials.<br>Please make sure you entered <b>valid</b> information.'))
@@ -34,7 +33,7 @@ def register_view(request):
     return render(request, 'register.html', {'register_form': form})
 
 
-def activateEmail(request, user, to_email):
+def activate_email(request, user, to_email):
     mail_subject = 'Activate your user account.'
     message = render_to_string('template-activate-account.html',
     {
@@ -79,7 +78,7 @@ def login_view(request):
             user = authenticate(username = username, password = password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f'You are logged in as { request.user.first_name }')
+                messages.info(request, mark_safe(f'You are logged in as <b>{ request.user.first_name }</b>'))
                 return redirect('home')
         else:
             messages.error(request, f'Invalid username or password')
@@ -165,7 +164,5 @@ def password_reset_confirm(request, uidb64, token):
         form = SetPasswordForm(user)
         return render(request, 'change-password.html', {'form':form})
     else:
-        messages.error(request, mark_safe('Reset password link <b>invalid</b> or <b>expired</b>.'))
-    
-    messages.error(request, 'Something went wrong, redirecting back to homepage')
+        messages.error(request, mark_safe('Link <b>invalid</b> or <b>expired</b>.'))
     return redirect('home')

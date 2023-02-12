@@ -167,6 +167,6 @@ EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 EMAIL_USE_TLS = True
 
-PASSWORD_RESET_TIMEOUT = 1800
+PASSWORD_RESET_TIMEOUT = 900
 
 # End of custom settings
