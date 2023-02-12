@@ -145,6 +145,7 @@ def password_reset_view(request):
     form = PasswordResetForm()
     return render(request, 'reset-password.html', {'form': form})
 
+
 def password_reset_confirm(request, uidb64, token):
     User = get_user_model()
     try:
