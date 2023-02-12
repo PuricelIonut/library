@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %} Home {% endblock %}
 
 {% block body %}
 
 {% include 'messages.html' %}
 
-{% load static %}
-<link rel="stylesheet" href="{% static 'homepage/home.css' %}">
+<link rel="stylesheet" href="{% static 'homepage/searchbar.css' %}">
 
 <div class="searchbar-container">
     <form id='searchbar' class="d-flex" role="search">
@@ -17,8 +18,9 @@
 </div>
 <hr>
 
+<link rel="stylesheet" href="{% static 'homepage/genre-book.css' %}">
 
-<div class="d-flex p-2">
+<div class="d-flex">
     <div id="genres-container">
         <ul class="list-group">
             <li class="list-group-item list-group-item-dark"><b>Genres</b></li>
