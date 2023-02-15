@@ -7,7 +7,6 @@
 #genres-container {
     background-color: green;
     width:20rem;
-    height: 100vh;
     margin: 1rem;
     border-radius: 5px;
 }
@@ -31,4 +30,18 @@
     width: 70rem;
     border-radius: 5px;
 
+}
+
+@media (max-width: 600px) {
+    #content-container {
+        align-items: center;
+        flex-direction: column;
+    }
+    #genres-container {
+        width: 20rem;
+    }
+    #books-container {
+        flex-direction: column;
+        width: 20rem;
+    }
 }
