@@ -51,18 +51,14 @@
         </ul>
     </div>
     <div id="books-container" class="container-fluid">
-        <div class="book">This is a book</div>
-        <div class="book">This is a book</div>
-        <div class="book">This is a book</div>
-        <div class="book">This is a book</div>
-        <div class="book">This is a book</div>
-        <div class="book">This is a book</div>
-        <div class="book">This is a book</div>
-        <div class="book">This is a book</div>
-        <div class="book">This is a book</div>
-        <div class="book">This is a book</div>
-        <div class="book">This is a book</div>
-
+        {% for book in books %}
+            <div class="book"><h1>{{ book.title}}</h1>
+                <p>Author: {{ book.author }}</p>
+                <p>Number of pages: {{ book.pages }}</p>
+                <p>Genre: {{ book.genre }}</p>
+                <p>Language: {{ book.language }}</p>
+            </div>
+        {% endfor %}
     </div>        
 </div>
 
