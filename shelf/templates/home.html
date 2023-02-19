@@ -25,10 +25,10 @@
     <div id="genres-container" class="container-fluid">
         <ul class="list-group">
             <li class="list-group-item list-group-item-dark"><b>Genres</b></li>
-            <form action="" method="GET">
+            <form action=""  method="GET">
                 {% for x in genres %}
                 <li class="list-group-item">
-                    <input class="form-check-input me-1" type="checkbox" value="" name="genre_filter">
+                    <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}"name="filter">
                     <label class="form-check-label" for="thirdCheckbox">{{ x.genre }}</label>
                 </li>
                 {% endfor %}

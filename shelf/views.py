@@ -7,7 +7,9 @@ def home_view(request):
     genres = BookModel.objects.values('genre').distinct()
     return render(request, 'home.html', {'books': books, 'genres': genres})
 
+
 def filter_books_view(request, f):
-    books = BookModel.objects.filter(genre=f)
+    filter = request.GET.get('filter')
+    books = BookModel.objects.filter(genre=filter)
     genres = BookModel.objects.values('genre').distinct()
     return render(request, 'home.html', {'books':books, 'genres':genres})

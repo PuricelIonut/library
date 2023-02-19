@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'shelf',
 
     # Format
-    'crispy_forms'
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
