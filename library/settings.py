@@ -69,7 +69,7 @@ ROOT_URLCONF = 'library.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR, 'templates/', 'account/templates/'],
+        'DIRS': [BASE_DIR, 'templates/', 'account/templates/', 'shelf/templates/',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
