@@ -25,18 +25,18 @@
     <div id="genres-container" class="container-fluid">
         <ul class="list-group">
             <li class="list-group-item list-group-item-dark"><b>Genres</b></li>
-            <form action=""  method="GET">
-                {% for x in genres %}
-                <li class="list-group-item">
-                    <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}"name="filter">
-                    <label class="form-check-label" for="thirdCheckbox">{{ x.genre }}</label>
-                </li>
-                {% endfor %}
-                <button type="submit" class="btn btn-outline-dark">Apply Filter</button>
-            </form>
+            {% for x in genres %}
+            <li class="list-group-item">
+                {% if x.genre in request.path %} 
+                    <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="filter" checked>
+                {% else %}
+                <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="filter">
+                {% endif %}
+                <a style='text-decoration: none;color: black;' href="{% url 'books_filter' genre=x.genre %}">{{ x.genre }}</a>
+            </li>
+            {% endfor %}
         </ul>
     </div>
-
     <div id="books-container" class="container-fluid">
         {% for book in books %}
             <div class="book"><h1>{{ book.title}}</h1>
