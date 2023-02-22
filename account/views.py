@@ -107,10 +107,6 @@ def logout_view(request):
     return redirect('home')
 
 
-def not_found_view(request, exception):
-    return render(request, 'templates/404.html')
-
-
 @user_not_authenticated
 def password_reset_view(request):
     if request.method == 'POST':

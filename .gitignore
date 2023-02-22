@@ -5,4 +5,3 @@ db.sqlite3
 *.env
 .vscode
 /sent_emails
-/sent_emails

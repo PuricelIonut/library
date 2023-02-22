@@ -15,8 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from shelf import views
-
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +23,4 @@ urlpatterns = [
     path('account/', include('account.urls')),
 ]
 
-handler404 = 'account.views.not_found_view'
+handler404 = views.not_found_view
