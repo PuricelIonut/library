@@ -12,3 +12,10 @@ def filter_books_view(request, genre):
     books = BookModel.objects.filter(genre=genre)
     genres = BookModel.objects.values('genre').distinct()
     return render(request, 'home.html', {'books':books, 'genres':genres})
+
+
+def search_books_view(request):
+    search_term = request.GET.get('search')
+    books = BookModel.objects.filter(title__icontains=search_term)
+    genres = BookModel.objects.values('genre').distinct()
+    return render(request, 'home.html', {'books':books, 'genres': genres})

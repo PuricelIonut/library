@@ -11,18 +11,19 @@
 <link rel="stylesheet" href="{% static 'searchbar.css' %}">
 
 <div class="searchbar-container">
-    <form id='searchbar' class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Enter book name..." aria-label="Search">
+    <form id='searchbar' class="d-flex" role="search" method='GET' action="{% url 'search_books' %}">
+        <input class="form-control me-2" type="search" name='search' placeholder="Enter book name..." aria-label="Search">
         <button hidden type="submit"></button>
     </form>
 </div>
+
 <hr>
 {% for x in genres %}
     {% if x.genre in request.path %} 
         <h1 style='text-align: center;' class="display-6">Looking for: '{{ x.genre|lower }}', books</h1>
     {% endif %}
 {% endfor %}
-<hr>
+
 <link rel="stylesheet" href="{% static 'genre-book.css' %}">
 
 <div id="content-container" class="container-fluid">
