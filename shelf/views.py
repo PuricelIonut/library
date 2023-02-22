@@ -7,13 +7,15 @@ from .models import BookModel
 def home_view(request):
     books = BookModel.objects.all()
     genres = BookModel.objects.values('genre').distinct()
-    return render(request, 'home.html', {'books': books, 'genres': genres})
+    languages = BookModel.objects.values('language').distinct()
+    return render(request, 'home.html', {'books': books, 'genres': genres, 'languages':languages})
 
 
 def filter_books_view(request, genre):
     books = BookModel.objects.filter(genre=genre)
     genres = BookModel.objects.values('genre').distinct()
-    return render(request, 'home.html', {'books':books, 'genres':genres})
+    languages = BookModel.objects.values('language').distinct()
+    return render(request, 'home.html', {'books':books, 'genres':genres, 'languages':languages})
 
 
 def search_books_view(request):
@@ -25,4 +27,5 @@ def search_books_view(request):
         Q(language__icontains=search_term)
     )
     genres = BookModel.objects.values('genre').distinct()
-    return render(request, 'home.html', {'books':books, 'genres': genres})
+    languages = BookModel.objects.values('language').distinct()
+    return render(request, 'home.html', {'books':books, 'genres': genres, 'languages':languages})

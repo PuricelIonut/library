@@ -24,11 +24,12 @@
     {% endif %}
 {% endfor %}
 
-<link rel="stylesheet" href="{% static 'genre-book.css' %}">
+<link rel="stylesheet" href="{% static 'filters.css' %}">
 
 <div id="content-container" class="container-fluid">
-    
-    <div id="genres-container" class="container-fluid">
+    <div id="filters-container" class="container-fluid">
+        
+        <!-- Filter by genre -->
         <ul class="list-group">
             <li class="list-group-item list-group-item-dark"><b>Genres</b></li>
             {% for x in genres %}
@@ -42,16 +43,59 @@
             </li>
             {% endfor %}
         </ul>
+
+        <!-- Filter by language -->
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-dark"><b>Language</b></li>
+            {% for x in languages %}
+            <li class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" value="" name="language">
+                <a style='text-decoration: none;color: black;' href="#">{{ x.language }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Filter by number of pages -->
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-dark"><b>Number of pages</b></li>
+            
+            <li class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_100">
+                <a style='text-decoration: none;color: black;' href="#">0-100</a>
+            </li>
+            
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_200">
+            <a style='text-decoration: none;color: black;' href="#">100-200</a>
+            </li>
+            
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_300">
+            <a style='text-decoration: none;color: black;' href="#">200-300</a>
+            </li>
+            
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_max">
+            <a style='text-decoration: none;color: black;' href="#">300+</a>
+            </li>
+        </ul>
+    
     </div>
+
+    <!-- Books container -->
     <div id="books-container" class="container-fluid">
-        {% for book in books %}
-            <div class="book"><h1>{{ book.title}}</h1>
-                <p>Author: {{ book.author }}</p>
-                <p>Number of pages: {{ book.pages }}</p>
-                <p>Genre: {{ book.genre }}</p>
-                <p>Language: {{ book.language }}</p>
-            </div>
-        {% endfor %}
+        {% if not books %}
+        <h1 class="display-6">No book found matching your search terms...</h1>
+        {% else %}
+            {% for book in books %}
+                <div class="book"><h1>{{ book.title}}</h1>
+                    <p>Author: {{ book.author }}</p>
+                    <p>Number of pages: {{ book.pages }}</p>
+                    <p>Genre: {{ book.genre }}</p>
+                    <p>Language: {{ book.language }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}        
     </div>        
 </div>
 
