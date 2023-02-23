@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Q
+from django.http import Http404
 
 from .models import BookModel
 
@@ -29,3 +30,11 @@ def search_books_view(request):
     genres = BookModel.objects.values('genre').distinct()
     languages = BookModel.objects.values('language').distinct()
     return render(request, 'home.html', {'books':books, 'genres': genres, 'languages':languages})
+
+
+def book_view(request, pk):
+    try:
+        book = BookModel.objects.get(id=pk)
+    except:
+        raise Http404()
+    return render(request, 'book.html', {'book':book})

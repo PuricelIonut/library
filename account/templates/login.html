@@ -2,15 +2,13 @@
 
 {% block title %} Login {% endblock %}
 
-
-{%block body %}
+{% load static %}
 
 {% load crispy_forms_tags %} 
 
+{%block body %}
+
 {% include 'messages.html' %}
-
-
-{% load static %}
 
 <link rel="stylesheet" href="{% static 'login.css' %}">
 
