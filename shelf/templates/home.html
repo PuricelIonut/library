@@ -8,6 +8,7 @@
 
 {% include 'messages.html' %}
 
+<!-- Searchbar -->
 <link rel="stylesheet" href="{% static 'searchbar.css' %}">
 
 <div class="searchbar-container">
@@ -17,10 +18,11 @@
     </form>
 </div>
 
+<!-- Filter messages -->
 <hr>
 {% for x in genres %}
     {% if x.genre in request.path %} 
-        <h1 style='text-align: center;' class="display-6">Looking for: '{{ x.genre|lower }}', books</h1>
+        <h1 style='text-align: center;' class="display-6">Looking for: '{{ x.genre|lower }}' books</h1>
     {% endif %}
 {% endfor %}
 
@@ -88,7 +90,8 @@
         <h1 class="display-6">No book found matching your search terms...</h1>
         {% else %}
             {% for book in books %}
-                <div class="book"><h1>{{ book.title}}</h1>
+                <div class="book">
+                    <h1><a href="{% url 'book' pk=book.id %}">{{ book.title}}</a></h1>
                     <p>Author: {{ book.author }}</p>
                     <p>Number of pages: {{ book.pages }}</p>
                     <p>Genre: {{ book.genre }}</p>

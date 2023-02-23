@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {% load static %}
 
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -11,7 +12,8 @@
 
 </head>
 <body>
-
+    
+    <!-- Navbar -->
     <nav id="nav" class="navbar navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><b>Library</b></a>
@@ -29,7 +31,6 @@
                 </div>
                 <div class="offcanvas-body">
                     
-                    {% load static %}
                     <link rel="stylesheet" href="{% static 'base.css' %}">
 
                     <div class="offcanvas-items">

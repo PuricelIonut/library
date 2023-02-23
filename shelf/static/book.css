@@ -1,9 +1,14 @@
-.container {
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: pink;
     width: 100%;
+    height: 45rem;
 }
 
 #book-data {
     background-color: red;
-    width:50%;
+    width:90%;
+    height: 40rem;
 }
