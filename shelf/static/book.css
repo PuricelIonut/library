@@ -1,0 +1,9 @@
+.container {
+    background-color: pink;
+    width: 100%;
+}
+
+#book-data {
+    background-color: red;
+    width:50%;
+}
