@@ -24,3 +24,4 @@ urlpatterns = [
 ]
 
 handler404 = views.not_found_view
+

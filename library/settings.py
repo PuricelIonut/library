@@ -170,4 +170,10 @@ EMAIL_USE_TLS = True
 # Time limit for token usage 
 PASSWORD_RESET_TIMEOUT = 900 # 15 mins
 
+
+# Media URL / Root
+
+MEDIA_ROOT = ''
+MEDIA_URL = ''
+
 # End of custom settings
