@@ -33,33 +33,47 @@
         
         <!-- Filter by genre -->
         <ul class="list-group">
-            <li class="list-group-item list-group-item-dark"><b>Genres</b></li>
-            {% for x in genres %}
-            <li class="list-group-item">
-                {% if x.genre in request.path %} 
-                    <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="filter" checked>
-                {% else %}
-                    <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="filter">
-                {% endif %}
-                <a style='text-decoration: none;color: black;' href="{% url 'books_filter' genre=x.genre %}">{{ x.genre }}</a>
-            </li>
-            {% endfor %}
+            <button class='btn btn-dark' type="button" data-bs-toggle="collapse" data-bs-target="#genres-collapse" aria-expanded="false" aria-controls="collapseExample">
+                Genres
+            </button>
+            <div class="collapse" id="genres-collapse">
+                <div class="card card-body">
+                    {% for x in genres %}
+                    <li class="list-group-item">
+                        {% if x.genre in request.path %} 
+                            <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="filter" checked>
+                        {% else %}
+                            <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="filter">
+                        {% endif %}
+                        <a style='text-decoration: none;color: black;' href="{% url 'books_filter' genre=x.genre %}">{{ x.genre }}</a>
+                    </li>
+                    {% endfor %}
+                </div>
+            </div>
         </ul>
 
         <!-- Filter by language -->
         <ul class="list-group">
-            <li class="list-group-item list-group-item-dark"><b>Language</b></li>
-            {% for x in languages %}
-            <li class="list-group-item">
-                    <input class="form-check-input me-1" type="checkbox" value="" name="language">
-                <a style='text-decoration: none;color: black;' href="#">{{ x.language }}</a>
-            </li>
-            {% endfor %}
+            <button class='btn btn-dark' type="button" data-bs-toggle="collapse" data-bs-target="#languages-collapse" aria-expanded="false" aria-controls="collapseExample">
+                Languages
+            </button>
+            <div class="collapse" id="languages-collapse">
+                <div class="card card-body">
+                    {% for x in languages %}
+                    <li class="list-group-item">
+                            <input class="form-check-input me-1" type="checkbox" value="" name="language">
+                        <a style='text-decoration: none;color: black;' href="#">{{ x.language }}</a>
+                    </li>
+                    {% endfor %}
+                </div>
+              </div>
         </ul>
 
         <!-- Filter by number of pages -->
         <ul class="list-group">
-            <li class="list-group-item list-group-item-dark"><b>Number of pages</b></li>
+            <button class='btn btn-dark' type="button" data-bs-toggle="collapse" data-bs-target="#pages-collapse" aria-expanded="false" aria-controls="collapseExample">
+                Number of pages
+              </button>
             
             <li class="list-group-item">
                     <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_100">
