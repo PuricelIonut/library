@@ -174,6 +174,6 @@ PASSWORD_RESET_TIMEOUT = 900 # 15 mins
 # Media URL / Root
 
 MEDIA_ROOT = ''
-MEDIA_URL = ''
+MEDIA_URL = 'media/'
 
 # End of custom settings
