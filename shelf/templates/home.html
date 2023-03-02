@@ -20,11 +20,8 @@
 
 <!-- Filter messages -->
 <hr>
-{% for x in genres %}
-    {% if x.genre in request.path %} 
-        <h1 style='text-align: center;' class="display-6">Looking for: '{{ x.genre|lower }}' books</h1>
-    {% endif %}
-{% endfor %}
+
+<!-- TO DO-->
 
 <link rel="stylesheet" href="{% static 'filters.css' %}">
 
@@ -45,7 +42,7 @@
                         {% else %}
                             <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="filter">
                         {% endif %}
-                        <a style='text-decoration: none;color: black;' href="{% url 'books_filter' genre=x.genre %}">{{ x.genre }}</a>
+                        <a style='text-decoration: none;color: black;' href="{% url 'books_filter' filter_type='genre' filter_option=x.genre %}">{{ x.genre }}</a>
                     </li>
                     {% endfor %}
                 </div>
@@ -61,8 +58,12 @@
                 <div class="card card-body">
                     {% for x in languages %}
                     <li class="list-group-item">
+                        {% if x.language in request.path %} 
+                            <input class="form-check-input me-1" type="checkbox" value="" name="language" checked>
+                        {% else %}
                             <input class="form-check-input me-1" type="checkbox" value="" name="language">
-                        <a style='text-decoration: none;color: black;' href="#">{{ x.language }}</a>
+                        {% endif %}
+                        <a style='text-decoration: none;color: black;' href="{% url 'books_filter' filter_type='language' filter_option=x.language %}">{{ x.language }}</a>
                     </li>
                     {% endfor %}
                 </div>
@@ -73,27 +74,30 @@
         <ul class="list-group">
             <button class='btn btn-dark' type="button" data-bs-toggle="collapse" data-bs-target="#pages-collapse" aria-expanded="false" aria-controls="collapseExample">
                 Number of pages
-              </button>
-            
-            <li class="list-group-item">
-                    <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_100">
-                <a style='text-decoration: none;color: black;' href="#">0-100</a>
-            </li>
-            
-            <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_200">
-            <a style='text-decoration: none;color: black;' href="#">100-200</a>
-            </li>
-            
-            <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_300">
-            <a style='text-decoration: none;color: black;' href="#">200-300</a>
-            </li>
-            
-            <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_max">
-            <a style='text-decoration: none;color: black;' href="#">300+</a>
-            </li>
+            </button>
+            <div class="collapse" id="pages-collapse">
+                <div class="card card-body">
+                    <li class="list-group-item">
+                            <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_100">
+                        <a style='text-decoration: none;color: black;' href="{% url 'books_filter' filter_type='pages' filter_option='0-100' %}">0-100</a>
+                    </li>
+                    
+                    <li class="list-group-item">
+                        <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_200">
+                    <a style='text-decoration: none;color: black;' href="#">100-200</a>
+                    </li>
+                    
+                    <li class="list-group-item">
+                        <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_300">
+                    <a style='text-decoration: none;color: black;' href="#">200-300</a>
+                    </li>
+                    
+                    <li class="list-group-item">
+                        <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_max">
+                    <a style='text-decoration: none;color: black;' href="#">300+</a>
+                    </li>
+                </div>
+            </div>
         </ul>
     
     </div>
