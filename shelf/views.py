@@ -9,25 +9,26 @@ def home_view(request):
     books = BookModel.objects.all()
     genres = BookModel.objects.values('genre').distinct()
     languages = BookModel.objects.values('language').distinct()
-    return render(request, 'home.html', {'books': books, 'genres': genres, 'languages':languages})
+    number_of_pages = ['0-100', '100-200', '200-300', '300+']
+    return render(request, 'home.html', {'books': books, 'genres': genres, 'languages':languages, 'pages':number_of_pages})
 
 
 def filter_books_view(request, filter_type, filter_option):
     genres = BookModel.objects.values('genre').distinct()
     languages = BookModel.objects.values('language').distinct()
+    number_of_pages = ['0-100', '100-200', '200-300', '300+']
     if filter_type == 'genre':
         filtered_results  = BookModel.objects.filter(genre=filter_option)
     elif filter_type == 'language':
         filtered_results  = BookModel.objects.filter(language=filter_option)
     elif filter_type == 'pages':
         if '-' in filter_option:
-            temp = filter_option.split('-')
-            x = range(int(temp[0]), int(temp[1]) + 1)
+            x = filter_option.split('-')
+            filtered_results = BookModel.objects.filter(pages__range=[x[0], int(x[1]) + 1])
         elif '+' in filter_option:
-            x = range(300, 9999)
-        filtered_results = BookModel.objects.filter(pages__range=x)
+            filtered_results = BookModel.objects.filter(pages__range=[300, 9999])
 
-    return render(request, 'home.html', {'books':filtered_results, 'genres':genres, 'languages':languages})
+    return render(request, 'home.html', {'books':filtered_results, 'genres':genres, 'languages':languages, 'pages':number_of_pages})
 
 
 def search_books_view(request):
@@ -40,7 +41,8 @@ def search_books_view(request):
     )
     genres = BookModel.objects.values('genre').distinct()
     languages = BookModel.objects.values('language').distinct()
-    return render(request, 'home.html', {'books':books, 'genres': genres, 'languages':languages})
+    number_of_pages = ['0-100', '100-200', '200-300', '300+']
+    return render(request, 'home.html', {'books':books, 'genres': genres, 'languages':languages, 'pages':number_of_pages})
 
 
 def book_view(request, pk):

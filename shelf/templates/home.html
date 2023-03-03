@@ -77,25 +77,16 @@
             </button>
             <div class="collapse" id="pages-collapse">
                 <div class="card card-body">
-                    <li class="list-group-item">
-                            <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_100">
-                        <a style='text-decoration: none;color: black;' href="{% url 'books_filter' filter_type='pages' filter_option='0-100' %}">0-100</a>
-                    </li>
-                    
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_200">
-                    <a style='text-decoration: none;color: black;' href="#">100-200</a>
-                    </li>
-                    
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_300">
-                    <a style='text-decoration: none;color: black;' href="#">200-300</a>
-                    </li>
-                    
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_max">
-                    <a style='text-decoration: none;color: black;' href="#">300+</a>
-                    </li>
+                    {% for x in pages %}
+                        <li class="list-group-item">
+                                {% if x in request.path %}
+                                <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_100" checked>
+                                {% else %}
+                                <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_100">
+                                {% endif %}
+                            <a style='text-decoration: none;color: black;' href="{% url 'books_filter' filter_type='pages' filter_option=x %}">{{ x }}</a>
+                        </li>
+                    {% endfor %}
                 </div>
             </div>
         </ul>
