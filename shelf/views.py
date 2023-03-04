@@ -33,7 +33,7 @@ def filter_books_view(request, filter_type, filter_option):
                 pages__range=[x[0], int(x[1]) + 1]
             )
         elif "+" in filter_option:
-            filtered_results = BookModel.objects.filter(pages__range=[300, 9999])
+            filtered_results = BookModel.objects.filter(pages__range=[1000, 9999])
 
     return render(
         request,
@@ -45,6 +45,8 @@ def filter_books_view(request, filter_type, filter_option):
             "titles":BookData.titles,
             "authors":BookData.authors,
             "pages": BookData.number_of_pages,
+            "fil_option": filter_option,
+            "fil_type": filter_type,
         },
     )
 

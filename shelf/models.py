@@ -20,3 +20,4 @@ class BookModel(models.Model):
             raise ValueError('Not enough stock!')
         else:
             return self.quantity - quantity_to_remove
+        

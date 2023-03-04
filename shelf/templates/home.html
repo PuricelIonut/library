@@ -14,8 +14,13 @@
 
 <!-- Filter messages -->
 <hr>
-
-<!-- TO DO-->
+{% if books and fil_option != None %}
+    {% if fil_type != 'pages'%}
+    <h1 style="text-align: center;" class="display-6">Looking for: "{{ fil_option|lower }}" books...</h1>
+    {% else %}
+    <h1 style="text-align: center;" class="display-6">Looking for: "{{ fil_option|lower }} pages" books...</h1>
+    {% endif %}
+{% endif %}
 
 <link rel="stylesheet" href="{% static 'filters.css' %}">
 
@@ -78,19 +83,17 @@
                                 {% else %}
                                 <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_100">
                                 {% endif %}
-                            <a style='text-decoration: none;color: black;' href="{% url 'books_filter' filter_type='pages' filter_option=x %}">{{ x }}</a>
+                            <a style='text-decoration: none;color: black;' href="{% url 'books_filter' filter_type='pages' filter_option=x %}">{{ x }} pages</a>
                         </li>
                     {% endfor %}
                 </div>
             </div>
         </ul>
-    
     </div>
-
     <!-- Books container -->
     <div id="books-container" class="container-fluid">
         {% if not books %}
-        <h1 class="display-6">No book found matching your search terms...</h1>
+        <h1 class="display-6">No books found matching your search terms...</h1>
         {% else %}
             {% for book in books %}
                 <a href="{% url 'book' pk=book.id %}"><div class="book" style="background-repeat: no-repeat;background-size: contain; background-image: url( {{book.image.url}} )">
