@@ -9,14 +9,7 @@
 {% include 'messages.html' %}
 
 <!-- Searchbar -->
-<link rel="stylesheet" href="{% static 'searchbar.css' %}">
-
-<div class="searchbar-container">
-    <form id='searchbar' class="d-flex" role="search" method='GET' action="{% url 'search_books' %}">
-        <input class="form-control me-2" type="search" name='search' placeholder="Enter book name..." aria-label="Search">
-        <button hidden type="submit"></button>
-    </form>
-</div>
+{% include 'searchbar.html' %}
 
 <!-- Filter messages -->
 <hr>
@@ -99,9 +92,8 @@
         <h1 class="display-6">No book found matching your search terms...</h1>
         {% else %}
             {% for book in books %}
-                <div class="book">
+                <div class="book" style="background-repeat: no-repeat;background-size: cover; background-image: url( {{book.image.url}} )">
                     <h1><a href="{% url 'book' pk=book.id %}">{{ book.title}}</a></h1>
-                    <p>Author: {{ book.author }}</p>
                     <p>Number of pages: {{ book.pages }}</p>
                     <p>Genre: {{ book.genre }}</p>
                     <p>Language: {{ book.language }}</p>

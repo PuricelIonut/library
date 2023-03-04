@@ -13,7 +13,9 @@ def home_view(request):
         {
             "books": BookData.all_books,
             "genres": BookData.genres,
-            "languages": BookData.languages,
+            "languages": BookData.languages,            
+            "titles":BookData.titles,
+            "authors":BookData.authors,
             "pages": BookData.number_of_pages,
         },
     )
@@ -40,6 +42,8 @@ def filter_books_view(request, filter_type, filter_option):
             "books": filtered_results,
             "genres": BookData.genres,
             "languages": BookData.languages,
+            "titles":BookData.titles,
+            "authors":BookData.authors,
             "pages": BookData.number_of_pages,
         },
     )
