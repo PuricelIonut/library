@@ -92,7 +92,7 @@
         <h1 class="display-6">No book found matching your search terms...</h1>
         {% else %}
             {% for book in books %}
-                <div class="book" style="background-repeat: no-repeat;background-size: cover; background-image: url( {{book.image.url}} )">
+                <div class="book" style="background-repeat: no-repeat;background-size: contain; background-image: url( {{book.image.url}} )">
                     <h1><a href="{% url 'book' pk=book.id %}">{{ book.title}}</a></h1>
                     <p>Number of pages: {{ book.pages }}</p>
                     <p>Genre: {{ book.genre }}</p>

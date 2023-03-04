@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{% static 'book.css' %}">
 
     <div id="book-data" class="container-fluid">
-        <div style="background-repeat: no-repeat;background-size: cover; background-image: url( {{ book.image.url }} )" id="book-image" class="container-fluid"></div>
+        <div style="background-repeat: no-repeat;background-size: contain; background-image: url( {{ book.image.url }} )" id="book-image" class="container-fluid"></div>
         <div id="book-info" class="container-fluid">
             <h1 style="margin: 0 0 0 4rem;">{{ book.title }}</h1>
             <h3 style="margin: 0 0 2rem 4rem;">By {{ book.author }}</h3>
