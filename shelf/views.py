@@ -64,6 +64,8 @@ def search_books_view(request):
             "books": books,
             "genres": BookData.genres,
             "languages": BookData.languages,
+            "titles":BookData.titles,
+            "authors":BookData.authors,
             "pages": BookData.number_of_pages,
         },
     )
