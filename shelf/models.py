@@ -2,11 +2,11 @@ from django.db import models
 
 
 class BookModel(models.Model):
-    title = models.CharField(max_length=200, blank=False)
-    language = models.CharField(max_length=100, blank=False)
+    title = models.CharField(max_length=200, blank=False, null=False)
+    language = models.CharField(max_length=100, blank=False, null=False)
     pages = models.IntegerField()
-    genre = models.CharField(max_length=50, blank=False)
-    author = models.CharField(max_length=100, blank=False)
+    genre = models.CharField(max_length=50, blank=False, null=False)
+    author = models.CharField(max_length=100, blank=False, null=False)
     release_year = models.IntegerField()
     quantity = models.IntegerField(default=0)
     description = models.TextField( max_length=5000 ,blank=True, null=False)
