@@ -155,7 +155,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # For login_required decorator
-LOGIN_URL = '/user/login'
+LOGIN_URL = '/account/login'
 
 # Change message tag to match bootstrap
 MESSAGE_TAGS = {

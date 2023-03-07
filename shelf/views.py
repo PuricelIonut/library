@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
+
 
 from .models import BookModel
 from .helpers import BookData
@@ -81,5 +83,9 @@ def book_view(request, pk):
     return render(request, "book.html", {"book": book})
 
 
+@login_required
 def manage_books(request):
-    ...
+    if request.user.is_superuser:
+        return render(request, 'manager.html', {})
+    else:
+        return redirect('home')

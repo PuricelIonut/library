@@ -34,6 +34,9 @@
                     <link rel="stylesheet" href="{% static 'base.css' %}">
 
                     <div class="offcanvas-items">
+                        {% if user.is_superuser %}
+                        <h4><a href="{% url 'books_manager' %}">Books Manager</a></h4>
+                        {% endif %}
                         {% if user.is_authenticated %}
                         <h4><a href="{% url 'change_password' %}">Change Password</a></h4>
                         <h4><a href="{% url 'logout' %}">Logout</a></h4>
