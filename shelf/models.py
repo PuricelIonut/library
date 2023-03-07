@@ -9,6 +9,7 @@ class BookModel(models.Model):
     author = models.CharField(max_length=100, blank=False, null=False)
     release_year = models.IntegerField()
     quantity = models.IntegerField(default=0)
+    price = models.DecimalField(max_digits=6, decimal_places=2, blank=False, null=False)
     description = models.TextField( max_length=5000 ,blank=True, null=False)
     image = models.ImageField(upload_to='shelf/files/book-covers/', default='shelf/files/default/default_cover.jpeg')
 

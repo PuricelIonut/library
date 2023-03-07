@@ -85,7 +85,7 @@ def book_view(request, pk):
 
 @login_required
 def manage_books(request):
-    if request.user.is_superuser:
-        return render(request, 'manager.html', {})
+    if request.user.is_staff or request.user.is_superuser:
+        return render(request, 'manager.html', {'books': BookData.all_books})
     else:
         return redirect('home')
