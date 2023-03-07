@@ -79,3 +79,7 @@ def book_view(request, pk):
     except:
         raise Http404()
     return render(request, "book.html", {"book": book})
+
+
+def manage_books(request):
+    ...
