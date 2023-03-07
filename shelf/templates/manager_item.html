@@ -4,9 +4,17 @@
     Stock Manager
 {% endblock %}
 
+{% load crispy_forms_tags %}         
+
 {% block body %}
-    <hr>
-    {{ book.title }}
-    <hr>
-    {{ book.author }}
+<div class="">
+    <form action="" method="POST">
+        <h3 class="display-6">Update book</h3><br>
+        {% csrf_token %}
+        {{ form|crispy}}
+        <div class="">
+            <button type="submit" class="btn btn-outline-dark">Update</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

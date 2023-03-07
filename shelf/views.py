@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 
-
+from .forms import BookModelForm
 from .models import BookModel
 from .helpers import BookData
 
@@ -94,7 +94,14 @@ def books_manager_all(request):
 def books_manager_item(request, pk):
     book = BookModel.objects.get(id=pk)
     if request.user.is_staff or request.user.is_superuser:
-        return render(request, 'manager_item.html', {'book': book})
+        if request.method == 'POST':
+            form = BookModelForm(request.POST, instance=book)
+            if form.is_valid():
+                form.save()
+                return redirect('books_manager_all')
+        else:
+            form = BookModelForm(instance=book)
+        return render(request, 'manager_item.html', {'book': book, 'form': form})
     else:
         return redirect('home')
         
