@@ -4,9 +4,18 @@
     Stock Manager
 {% endblock %}
 
+{% load static %}
+
 {% block body %}
-<div>
-    <table class="table table-hover">
+<link rel="stylesheet" href="{% static 'manager.css' %}">
+
+{% include 'messages.html' %}
+
+<div id="table-container" class="container-fluid">
+    <a href="{% url 'manager_item_add' %}" ><button style="margin-bottom: 2rem;" type="button" class="btn btn-outline-success">+ Add item</button></a>
+    <a href="#" ><button style="margin-bottom: 2rem;" type="button" class="btn btn-outline-danger">- Remove item</button></a>
+
+     <table class="table table-dark table-striped">
         <thead>
           <tr>
             <th scope="col">ID</th>
@@ -14,16 +23,18 @@
             <th scope="col">Author</th>
             <th scope="col">Quantity</th>
             <th scope="col">Price</th>
+            <th scope="col">Edit</th>
           </tr>
         </thead>
         <tbody>
             {% for book in books %}
             <tr>
-                <th scope="row"><a href="{% url 'books_manager_item' pk=book.id %}">{{book.id}}</a></th>
+                <th scope="row">{{book.id}}</th>
                 <td>{{book.title}}</td>
                 <td>{{book.author}}</td>
                 <td>{{book.quantity}}</td>
                 <td>${{book.price}}</td>
+                <td><a href="{% url 'manager_item_edit' pk=book.id %}"><button type="button" class="btn btn-light">Edit</button></a></td>
             </tr>
             {% endfor %}
         </tbody>

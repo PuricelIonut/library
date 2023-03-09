@@ -6,14 +6,29 @@
 
 {% load crispy_forms_tags %}         
 
+{% load static %}
+
 {% block body %}
-<div class="">
+<link rel="stylesheet" href="{% static 'manager_item.css' %}">
+
+{% include 'messages.html' %}
+
+
+<div class="container-fluid" id="form-container">
     <form action="" method="POST">
-        <h3 class="display-6">Update book</h3><br>
+        {% if 'item-add' in request.path %}
+        <h3 class="display-6">Add book</h3><br>
+        {% else %}
+        <h3 class="display-6">Edit book</h3><br>
+        {% endif %}
         {% csrf_token %}
         {{ form|crispy}}
-        <div class="">
-            <button type="submit" class="btn btn-outline-dark">Update</button>
+        <div class="container-fluid" id="button-container">
+            {% if 'item-add' in request.path %}
+            <button type="submit" class="btn btn-outline-dark">Add item</button>
+            {% else %}
+            <button type="submit" class="btn btn-outline-dark">Update item</button>
+            {% endif %}
         </div>
     </form>
 </div>

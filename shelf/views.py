@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from .forms import BookModelForm
 from .models import BookModel
@@ -84,24 +85,47 @@ def book_view(request, pk):
 
 
 @login_required
-def books_manager_all(request):
+def manager_all(request):
     if request.user.is_staff or request.user.is_superuser:
         return render(request, 'manager.html', {'books': BookData.all_books})
     else:
         return redirect('home')
     
+
 @login_required
-def books_manager_item(request, pk):
+def manager_item_edit(request, pk):
     book = BookModel.objects.get(id=pk)
     if request.user.is_staff or request.user.is_superuser:
         if request.method == 'POST':
             form = BookModelForm(request.POST, instance=book)
             if form.is_valid():
                 form.save()
-                return redirect('books_manager_all')
+                messages.success(
+                request, "Item succesfully modified!")
+                return redirect('manager_all')
+            else:
+                messages.error(request, "Please fill all the fields correctly!")
         else:
             form = BookModelForm(instance=book)
         return render(request, 'manager_item.html', {'book': book, 'form': form})
     else:
         return redirect('home')
-        
+
+
+@login_required
+def manager_item_add(request):
+    if request.user.is_staff or request.user.is_superuser:
+        if request.method == 'POST':
+            form = BookModelForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(
+                request, "Item succesfully added!")
+                return redirect('manager_all')
+            else:
+                messages.error(request, "Please fill all the fields correctly!")
+        else:
+            form = BookModelForm()
+        return render(request, 'manager_item.html', {'form': form})
+    else:
+        return redirect('home')

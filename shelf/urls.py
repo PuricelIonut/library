@@ -10,7 +10,7 @@ urlpatterns = [
     path('shelf/filter/<str:filter_type>/<str:filter_option>/', views.filter_books_view, name='books_filter'),
     
     # Book manager 
-    path('shelf/manager/', views.books_manager_all, name='books_manager_all'),
-    path('shelf/manager/item/<int:pk>', views.books_manager_item, name='books_manager_item'),
-
+    path('shelf/manager/', views.manager_all, name='manager_all'),
+    path('shelf/manager/item/<int:pk>', views.manager_item_edit, name='manager_item_edit'),
+    path('shelf/manager/item-add/', views.manager_item_add, name='manager_item_add'),
     ]
