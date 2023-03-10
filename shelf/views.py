@@ -10,21 +10,23 @@ from .helpers import BookData
 
 
 def home_view(request):
+    books = BookModel.objects.all()
     return render(
         request,
         "home.html",
         {
-            "books": BookData.all_books,
-            "genres": BookData.genres,
-            "languages": BookData.languages,            
-            "titles":BookData.titles,
-            "authors":BookData.authors,
+            "books": books,
+            "genres": books.values('genre').distinct(),
+            "languages": books.values('language').distinct(),            
+            "titles": books.values('title').distinct(),
+            "authors": books.values('author').distinct(),
             "pages": BookData.number_of_pages,
         },
     )
 
 
 def filter_books_view(request, filter_type, filter_option):
+    books = BookModel.objects.all()
     if filter_type == "genre":
         filtered_results = BookModel.objects.filter(genre=filter_option)
     elif filter_type == "language":
@@ -43,10 +45,10 @@ def filter_books_view(request, filter_type, filter_option):
         "home.html",
         {
             "books": filtered_results,
-            "genres": BookData.genres,
-            "languages": BookData.languages,
-            "titles":BookData.titles,
-            "authors":BookData.authors,
+            "genres": books.values('genre').distinct(),
+            "languages": books.values('language').distinct(),            
+            "titles": books.values('title').distinct(),
+            "authors": books.values('author').distinct(),
             "pages": BookData.number_of_pages,
             "fil_option": filter_option,
             "fil_type": filter_type,
@@ -55,6 +57,7 @@ def filter_books_view(request, filter_type, filter_option):
 
 
 def search_books_view(request):
+    all_books = BookModel.objects.all()
     search_term = request.GET.get("search")
     books = BookModel.objects.filter(
         Q(title__icontains=search_term)
@@ -67,10 +70,10 @@ def search_books_view(request):
         "home.html",
         {
             "books": books,
-            "genres": BookData.genres,
-            "languages": BookData.languages,
-            "titles":BookData.titles,
-            "authors":BookData.authors,
+            "genres": books.values('genre').distinct(),
+            "languages": books.values('language').distinct(),            
+            "titles": books.values('title').distinct(),
+            "authors": books.values('author').distinct(),
             "pages": BookData.number_of_pages,
         },
     )
@@ -86,15 +89,20 @@ def book_view(request, pk):
 
 @login_required
 def manager_all(request):
+    books = BookModel.objects.all()
+    search_id = request.GET.get('search')
     if request.user.is_staff or request.user.is_superuser:
-        return render(request, 'manager.html', {'books': BookData.all_books})
+        return render(request, 'manager.html', {'books': books, 'search_id': search_id})
     else:
         return redirect('home')
     
 
 @login_required
 def manager_item_edit(request, pk):
-    book = BookModel.objects.get(id=pk)
+    try:
+        book = BookModel.objects.get(id=pk)
+    except:
+        raise Http404()
     if request.user.is_staff or request.user.is_superuser:
         if request.method == 'POST':
             form = BookModelForm(request.POST, instance=book)
@@ -129,3 +137,14 @@ def manager_item_add(request):
         return render(request, 'manager_item.html', {'form': form})
     else:
         return redirect('home')
+    
+
+@login_required
+def manager_item_delete(request, pk):
+    try:
+        book = BookModel.objects.get(id=pk)
+    except:
+        raise Http404()
+    book.delete()
+    messages.success(request, 'Item succesfully deleted!')
+    return redirect('manager_all')

@@ -13,7 +13,11 @@
     <div id="book-data" class="container-fluid">
         <div style="background-repeat: no-repeat;background-size: contain; background-image: url( {{ book.image.url }} )" id="book-image" class="container-fluid"></div>
         <div id="book-info" class="container-fluid">
+            {% if user.is_superuser or user.is_staff %}
+            <h1 style="margin: 0 0 0 4rem;">{{ book.title }} (ID: {{ book.id }})</h1>
+            {% else %}
             <h1 style="margin: 0 0 0 4rem;">{{ book.title }}</h1>
+            {% endif %}
             <h3 style="margin: 0 0 2rem 4rem;">By {{ book.author }}</h3>
             <p style="margin-left: 1rem;">{{ book.description }}</p>
             <h5 style="margin: 2rem 1rem 0 1rem;">Genre: {{ book.genre }}</h5>

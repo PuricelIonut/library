@@ -11,9 +11,46 @@
 
 {% include 'messages.html' %}
 
+<!-- SEARCHBAR -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>  
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>  
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'searchbar.css' %}">
+
+<div class="searchbar-container">
+    {% if search_id != None %}
+    <form id='searchbar' class="d-flex" role="search" method='GET' action="{% url 'manager_item_edit' pk=search_id %}">
+        <input id="search_books" class="form-control me-2" type="submit" name='search' placeholder="Enter item ID" aria-label="Search">
+    </form>
+    {% else %}
+    <form id='searchbar' class="d-flex" role="search" method='GET' action="">
+      <input id="search_books" class="form-control me-2" type="text" name='search' placeholder="Enter item ID" aria-label="Search">
+    </form>
+    {% endif %}
+  </div>
+
+<script>
+    $( function() {
+      var availableTags = [
+        {% for x in books %}
+            "{{ x.id }}",
+        {% endfor %}
+      ];
+      $( "#search_books" ).autocomplete({
+        source: availableTags,
+        minLength: 1,
+        delay:100
+     });
+    });
+</script>
+
+
+<!-- TABLE -->
+
 <div id="table-container" class="container-fluid">
     <a href="{% url 'manager_item_add' %}" ><button style="margin-bottom: 2rem;" type="button" class="btn btn-outline-success">+ Add item</button></a>
-    <a href="#" ><button style="margin-bottom: 2rem;" type="button" class="btn btn-outline-danger">- Remove item</button></a>
 
      <table class="table table-dark table-striped">
         <thead>
@@ -23,7 +60,8 @@
             <th scope="col">Author</th>
             <th scope="col">Quantity</th>
             <th scope="col">Price</th>
-            <th scope="col">Edit</th>
+            <th scope="col">Edit Item</th>
+            <th scope="col">Delete Item</th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +73,8 @@
                 <td>{{book.quantity}}</td>
                 <td>${{book.price}}</td>
                 <td><a href="{% url 'manager_item_edit' pk=book.id %}"><button type="button" class="btn btn-light">Edit</button></a></td>
+                <td><a href="{% url 'manager_item_delete' pk=book.id %}"><button type="button" class="btn btn-light" onclick="return confirm('Message here');">Delete</button></a></td>
+               
             </tr>
             {% endfor %}
         </tbody>
