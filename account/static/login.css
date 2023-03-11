@@ -1,29 +1,32 @@
-.login-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    width: 90%;
-    height: 35rem;
-    padding: 0;
+#login-container {
+    margin-top: 10rem;
+    width:15%;
 }
 
-.login-form {
+#login-button {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 30%;
+    width: 90%;
+    margin: 2rem 0 2rem 0;
 }
 
-.login-form a {
+#login-button a {
+    text-align: center;
     text-decoration: none;
 }
 
-.login-form button {
-    margin: 1rem 0 1rem 0;
+#login-button button {
+    width: 30%;
+    margin-bottom: 1rem;
 }
 
-.login-form p {
-    margin-top: 3rem;
+@media (max-width: 600px) {
+    #login-button button {
+        width: 80%;
+    }
+    #login-container {
+        width:60%;
+    }
 }

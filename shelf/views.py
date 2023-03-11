@@ -148,3 +148,8 @@ def manager_item_delete(request, pk):
     book.delete()
     messages.success(request, 'Item succesfully deleted!')
     return redirect('manager_all')
+
+
+def manager_item_search(request):
+    id = request.GET.get('item')
+    return manager_item_edit(request, pk=id)

@@ -19,7 +19,7 @@
         {% if 'item-add' in request.path %}
         <h3 class="display-6">Add book</h3><br>
         {% else %}
-        <h3 class="display-6">Edit book</h3><br>
+        <h3 class="display-6">Edit book (ID: {{ book.id }})</h3><br>
         {% endif %}
         {% csrf_token %}
         {{ form|crispy}}

@@ -12,12 +12,12 @@
 
 <link rel="stylesheet" href="{% static 'register.css' %}">
 
-<div class="register-container">
+<div class='container-fluid' id="register-container">
     <form action="" method="POST">
-        <h3 class="display-6">Register New Account</h3><br>
+        <h3 style='text-align:center;'class="display-6">Register New Account</h3><br>
         {% csrf_token %}
         {{ register_form|crispy}}
-        <div class="register-button">
+        <div class='container-fluid' id="register-button" >
             <button type="submit" class="btn btn-outline-dark">Register</button>
         </div>
         <p class="text-center">Already have an account? <a href="{% url 'login' %}">Login</a> instead.</p>

@@ -20,16 +20,11 @@
 <link rel="stylesheet" href="{% static 'searchbar.css' %}">
 
 <div class="searchbar-container">
-    {% if search_id != None %}
-    <form id='searchbar' class="d-flex" role="search" method='GET' action="{% url 'manager_item_edit' pk=search_id %}">
-        <input id="search_books" class="form-control me-2" type="submit" name='search' placeholder="Enter item ID" aria-label="Search">
+    <form id='searchbar' class="d-flex" role="search" method='GET' action="{% url 'manager_item_search' %}">
+        <input id="search_books" class="form-control me-2" type="search" name='item' placeholder="Search item by ID" aria-label="Search">
+        <button type="submit" class="btn btn-outline-dark">Search</button>
     </form>
-    {% else %}
-    <form id='searchbar' class="d-flex" role="search" method='GET' action="">
-      <input id="search_books" class="form-control me-2" type="text" name='search' placeholder="Enter item ID" aria-label="Search">
-    </form>
-    {% endif %}
-  </div>
+</div>
 
 <script>
     $( function() {

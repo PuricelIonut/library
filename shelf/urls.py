@@ -11,7 +11,8 @@ urlpatterns = [
     
     # Book manager 
     path('shelf/manager/', views.manager_all, name='manager_all'),
-    path('shelf/manager/item/<int:pk>', views.manager_item_edit, name='manager_item_edit'),
+    path('shelf/manager/item-edit/<int:pk>', views.manager_item_edit, name='manager_item_edit'),
     path('shelf/manager/item-add/', views.manager_item_add, name='manager_item_add'),
     path('shelf/manager/item-remove/<int:pk>', views.manager_item_delete, name='manager_item_delete'),
+    path('shelf/manager/item-search/', views.manager_item_search, name='manager_item_search'),
     ]
