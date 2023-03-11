@@ -46,8 +46,9 @@
 
 <div id="table-container" class="container-fluid">
     <a href="{% url 'manager_item_add' %}" ><button style="margin-bottom: 2rem;" type="button" class="btn btn-outline-success">+ Add item</button></a>
-
-     <table class="table table-dark table-striped">
+    
+    <div class="table-responsive">
+      <table class="table table-dark table-striped">
         <thead>
           <tr>
             <th scope="col">ID</th>
@@ -68,11 +69,12 @@
                 <td>{{book.quantity}}</td>
                 <td>${{book.price}}</td>
                 <td><a href="{% url 'manager_item_edit' pk=book.id %}"><button type="button" class="btn btn-light">Edit</button></a></td>
-                <td><a href="{% url 'manager_item_delete' pk=book.id %}"><button type="button" class="btn btn-light" onclick="return confirm('Message here');">Delete</button></a></td>
+                <td><a href="{% url 'manager_item_delete' pk=book.id %}"><button type="button" class="btn btn-light" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button></a></td>
                
             </tr>
             {% endfor %}
         </tbody>
       </table>
+      </div>
 </div>
 {% endblock %}

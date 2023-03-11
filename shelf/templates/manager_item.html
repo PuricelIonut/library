@@ -27,7 +27,8 @@
             {% if 'item-add' in request.path %}
             <button type="submit" class="btn btn-outline-dark">Add item</button>
             {% else %}
-            <button type="submit" class="btn btn-outline-dark">Update item</button>
+            <button type="submit" class="btn btn-outline-dark">Update</button>
+            <a href="{% url 'manager_item_delete' pk=book.id %}"><button type="button" class="btn btn-outline-dark" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button></a>
             {% endif %}
         </div>
     </form>
