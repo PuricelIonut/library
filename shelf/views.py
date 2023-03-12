@@ -89,7 +89,7 @@ def book_view(request, pk):
 
 @login_required
 def manager_all(request):
-    books = BookModel.objects.all()
+    books = BookModel.objects.all().order_by('id')
     search_id = request.GET.get('search')
     if request.user.is_staff or request.user.is_superuser:
         return render(request, 'manager.html', {'books': books, 'search_id': search_id})
@@ -153,3 +153,20 @@ def manager_item_delete(request, pk):
 def manager_item_search(request):
     id = request.GET.get('item')
     return manager_item_edit(request, pk=id)
+
+
+def manager_quick_edit(request, pk):
+    obj = BookModel.objects.get(id=pk)
+    qt = request.GET.get(obj.author)
+    pr = request.GET.get(obj.title)
+    if qt and not pr:
+        obj.quantity = qt
+        obj.save()
+    elif pr and not qt:
+        obj.price = pr
+        obj.save()
+    elif qt and pr:
+        obj.quantity = qt
+        obj.price = pr
+        obj.save()  
+    return redirect('manager_all')

@@ -56,6 +56,7 @@
             <th scope="col">Author</th>
             <th scope="col">Quantity</th>
             <th scope="col">Price</th>
+            <th scope="col">Update Item</th>
             <th scope="col">Edit Item</th>
             <th scope="col">Delete Item</th>
           </tr>
@@ -66,13 +67,28 @@
                 <th scope="row">{{book.id}}</th>
                 <td>{{book.title}}</td>
                 <td>{{book.author}}</td>
-                <td>{{book.quantity}}</td>
-                <td>${{book.price}}</td>
+                  <!-- QUICK UPDATE QTTY AND PRICE -->
+                  <form class="d-flex" method='GET' action="{% url 'manager_quick_edit' pk=book.id %}">
+                   <td><input type='number' class="form-control-sm" name="{{ book.author }}" placeholder="{{ book.quantity }}"> </td>
+                   <td><input type='number' step='.01' class="form-control-sm" name="{{ book.title }}" placeholder="${{ book.price }}"> </td>
+                   <td><button type="submit" class="btn btn-light" onclick="return confirm('Are you sure you entered the data corectly?');">Update</button> </td>
+                  </form>
+                <!-- QUICK EDIT ITEM -->
                 <td><a href="{% url 'manager_item_edit' pk=book.id %}"><button type="button" class="btn btn-light">Edit</button></a></td>
+                
+                <!-- QUICK DELETE ITEM -->
                 <td><a href="{% url 'manager_item_delete' pk=book.id %}"><button type="button" class="btn btn-light" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button></a></td>
-               
             </tr>
             {% endfor %}
+            <script>
+              $('input[name=quantity]').keyup(function(){
+                if($(this).val().length)
+                  $('.icon_check').show();
+                else
+                  $('.icon_check').hide();
+              });
+            </script>
+
         </tbody>
       </table>
       </div>
