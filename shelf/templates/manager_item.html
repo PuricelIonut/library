@@ -13,16 +13,17 @@
 
 {% include 'messages.html' %}
 
-
 <div class="container-fluid" id="form-container">
     <form action="" method="POST">
+        
         {% if 'item-add' in request.path %}
-        <h3 class="display-6">Add book</h3><br>
+        <h3 style='text-align:center;' class="display-6">Add book <br>or<br><a style="text-decoration: none;" href="{% url 'manager_all' %}">Go Back</a></h3><br> 
         {% else %}
-        <h3 class="display-6">Edit book (ID: {{ book.id }})</h3><br>
+        <h3 style='text-align:center;' class="display-6">Edit book (ID: {{ book.id }}) <br>or<br><a style="text-decoration: none;" href="{% url 'manager_all' %}">Go Back</a></h3><br>
         {% endif %}
         {% csrf_token %}
         {{ form|crispy}}
+
         <div class="container-fluid" id="button-container">
             {% if 'item-add' in request.path %}
             <button type="submit" class="btn btn-outline-dark">Add item</button>
@@ -31,6 +32,7 @@
             <a href="{% url 'manager_item_delete' pk=book.id %}"><button type="button" class="btn btn-outline-dark" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button></a>
             {% endif %}
         </div>
+    
     </form>
 </div>
 {% endblock %}

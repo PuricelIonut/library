@@ -3,6 +3,8 @@ from django.db.models import Q
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.utils.safestring import mark_safe
+
 
 from .forms import BookModelForm
 from .models import BookModel
@@ -157,16 +159,22 @@ def manager_item_search(request):
 
 def manager_quick_edit(request, pk):
     obj = BookModel.objects.get(id=pk)
-    qt = request.GET.get(obj.author)
-    pr = request.GET.get(obj.title)
-    if qt and not pr:
-        obj.quantity = qt
-        obj.save()
-    elif pr and not qt:
-        obj.price = pr
-        obj.save()
-    elif qt and pr:
-        obj.quantity = qt
-        obj.price = pr
-        obj.save()  
+    qty = request.GET.get(str(obj.id))
+    prc = request.GET.get(obj.title)
+    try:
+        if qty and not prc:
+            obj.quantity = qty
+            obj.save()
+            messages.success(request, mark_safe(f"<b>Quantity</b> succesfully modified for item: <br><b>ID: {obj.id}</b> <br><b>Title: {obj.title}</b>"))
+        elif prc and not qty:
+            obj.price = prc
+            obj.save()
+            messages.success(request, mark_safe(f"<b>Price</b> succesfully modified for item: <br><b>ID: {obj.id}</b> <br><b>Title: {obj.title}</b>"))
+        else:
+            obj.quantity = qty
+            obj.price = prc
+            obj.save()
+            messages.success(request, mark_safe(f"<b>Quantity</b> and <b>Price</b> succesfully modified for item: <br><b>ID: {obj.id}</b> <br><b>Title: {obj.title}</b>"))  
+    except:
+        messages.error(request, f"There was a problem processing your request.Please try again!")
     return redirect('manager_all')
