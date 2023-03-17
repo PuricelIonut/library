@@ -4,7 +4,7 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.safestring import mark_safe
-
+from django.core.paginator import Paginator
 
 from .forms import BookModelForm
 from .models import BookModel
@@ -91,7 +91,9 @@ def book_view(request, pk):
 
 @login_required
 def manager_all(request):
-    books = BookModel.objects.all().order_by('id')
+    p = Paginator(BookModel.objects.filter().order_by('id'), 20)
+    page = request.GET.get('page')
+    books = p.get_page(page)
     search_id = request.GET.get('search')
     if request.user.is_staff or request.user.is_superuser:
         return render(request, 'manager.html', {'books': books, 'search_id': search_id})
