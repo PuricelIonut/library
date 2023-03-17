@@ -19,8 +19,8 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'searchbar.css' %}">
 
-<div class="searchbar-container">
-    <form id='searchbar' class="d-flex" role="search" method='GET' action="{% url 'manager_item_search' %}">
+<div id="searchbar-container" class="container-fluid">
+    <form class="d-flex" role="search" method='GET' action="{% url 'manager_item_search' %}">
         <input id="search_books" class="form-control me-2" type="search" name='item' placeholder="Search item by ID" aria-label="Search">
         <button type="submit" class="btn btn-outline-dark">Search</button>
     </form>
@@ -86,5 +86,20 @@
         </tbody>
       </table>
       </div>
+      
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+
 </div>
 {% endblock %}
