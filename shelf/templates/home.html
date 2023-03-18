@@ -90,6 +90,7 @@
             </div>
         </ul>
     </div>
+
     <!-- Books container -->
     <div id="books-container" class="container-fluid">
         {% if not books %}
@@ -103,43 +104,43 @@
     </div>        
 </div>
 <hr>
-<!-- 
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-      
-      {% if pag.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ pag.previous_page_number }}">Previous</a>
-        </li>
-      {% else %}
-        <li class="page-item disabled">
-          <a class="page-link">Previous</a>
-        </li>
-      {% endif %}
-      
-      {% for x in pag.paginator.page_range %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ x }}">{{ x }}</a>
-        </li>
-      {% endfor %}
-      
-      {% if pag.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ pag.next_page_number }}">Next</a>
-        </li>
-      {% else %}
-        <li class="page-item disabled">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      {% endif %}
-      
-    </ul>
-  </nav>
-  <hr>
-  <div class="d-flex justify-content-center">
-    <p class="fs-5 fw-lighter">Page {{ pag.number }} of {{ pag.paginator.num_pages }}</p>
-  </div>
+
+    <div class="container-fluid" id="pages_nav">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          
+          {% if items.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ items.previous_page_number }}">Previous</a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <a class="page-link">Previous</a>
+            </li>
+          {% endif %}
+          
+          {% for x in items.paginator.page_range %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ x }}">{{ x }}</a>
+            </li>
+          {% endfor %}
+          
+          {% if items.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ items.next_page_number }}">Next</a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          {% endif %}
+          
+        </ul>
+      </nav>
+      <div class="d-flex justify-content-center">
+        <p class="fs-5 fw-lighter">Page {{ items.number }} of {{ items.paginator.num_pages }}</p>
+      </div>
+    </div>
 </div>
--->
 
 {% endblock %}

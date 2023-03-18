@@ -11,13 +11,20 @@ from .models import BookModel
 from .helpers import BookData
 
 
+# Import all books
+books = BookModel.objects.all()
+
+
 def home_view(request):
-    books = BookModel.objects.all()
+    p = Paginator(BookModel.objects.filter().order_by('id'), 10)
+    page = request.GET.get('page')
+    book_pages = p.get_page(page)
     return render(
         request,
         "home.html",
         {
-            "books": books,
+            "books": book_pages,
+            "items": book_pages,
             "genres": books.values('genre').distinct(),
             "languages": books.values('language').distinct(),            
             "titles": books.values('title').distinct(),
@@ -28,7 +35,6 @@ def home_view(request):
 
 
 def filter_books_view(request, filter_type, filter_option):
-    books = BookModel.objects.all()
     if filter_type == "genre":
         filtered_results = BookModel.objects.filter(genre=filter_option)
     elif filter_type == "language":
@@ -41,11 +47,13 @@ def filter_books_view(request, filter_type, filter_option):
             )
         elif "+" in filter_option:
             filtered_results = BookModel.objects.filter(pages__range=[1000, 9999])
-
+    p = Paginator(filtered_results, 10)
+    page = request.GET.get('page')
+    book_pages = p.get_page(page)
     return render(
         request,
         "home.html",
-        {
+        {   "items":book_pages,
             "books": filtered_results,
             "genres": books.values('genre').distinct(),
             "languages": books.values('language').distinct(),            
@@ -59,19 +67,22 @@ def filter_books_view(request, filter_type, filter_option):
 
 
 def search_books_view(request):
-    all_books = BookModel.objects.all()
     search_term = request.GET.get("search")
-    books = BookModel.objects.filter(
+    found_books = BookModel.objects.filter(
         Q(title__icontains=search_term)
         | Q(author__icontains=search_term)
         | Q(genre__icontains=search_term)
         | Q(language__icontains=search_term)
     )
+    p = Paginator(found_books, 10)
+    page = request.GET.get('page')
+    book_pages = p.get_page(page)
     return render(
         request,
         "home.html",
         {
-            "books": books,
+            "items": book_pages,
+            "books": found_books,
             "genres": books.values('genre').distinct(),
             "languages": books.values('language').distinct(),            
             "titles": books.values('title').distinct(),

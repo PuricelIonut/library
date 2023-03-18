@@ -31,6 +31,12 @@
 
 }
 
+#pages_nav {
+    justify-content: center;
+    align-items: flex-end;
+}
+
+
 @media (max-width: 600px) {
     #content-container {
         align-items: center;
