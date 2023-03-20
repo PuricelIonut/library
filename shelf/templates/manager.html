@@ -29,7 +29,7 @@
 <script>
     $( function() {
       var availableTags = [
-        {% for x in books %}
+        {% for x in items %}
             "{{ x.id }}",
         {% endfor %}
       ];
@@ -63,7 +63,7 @@
         </thead>
         <tbody>
             
-            {% for book in books %}
+            {% for book in items %}
             <tr>
                 <th scope="row">{{book.id}}</th>
                 <td>{{book.title}}</td>
@@ -88,42 +88,7 @@
       </div>
       
       <!-- PAGINATION -->
-      
 
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          
-          {% if books.has_previous %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ books.previous_page_number }}">Previous</a>
-            </li>
-          {% else %}
-            <li class="page-item disabled">
-              <a class="page-link">Previous</a>
-            </li>
-          {% endif %}
-          
-          {% for x in books.paginator.page_range %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ x }}">{{ x }}</a>
-            </li>
-          {% endfor %}
-          
-          {% if books.has_next %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ books.next_page_number }}">Next</a>
-            </li>
-          {% else %}
-            <li class="page-item disabled">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          {% endif %}
-          
-        </ul>
-      </nav>
-      <hr>
-      <div class="d-flex justify-content-center">
-        <p class="fs-5 fw-lighter">Page {{ books.number }} of {{ books.paginator.num_pages }}</p>
-      </div>
-</div>
+  {% include 'pagination.html' %}
+
 {% endblock %}

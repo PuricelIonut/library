@@ -107,7 +107,7 @@ def manager_all(request):
     books = p.get_page(page)
     search_id = request.GET.get('search')
     if request.user.is_staff or request.user.is_superuser:
-        return render(request, 'manager.html', {'books': books, 'search_id': search_id})
+        return render(request, 'manager.html', {'items': books, 'search_id': search_id})
     else:
         return redirect('home')
     

@@ -105,42 +105,6 @@
 </div>
 <hr>
 
-    <div class="container-fluid" id="pages_nav">
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          
-          {% if items.has_previous %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ items.previous_page_number }}">Previous</a>
-            </li>
-          {% else %}
-            <li class="page-item disabled">
-              <a class="page-link">Previous</a>
-            </li>
-          {% endif %}
-          
-          {% for x in items.paginator.page_range %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ x }}">{{ x }}</a>
-            </li>
-          {% endfor %}
-          
-          {% if items.has_next %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ items.next_page_number }}">Next</a>
-            </li>
-          {% else %}
-            <li class="page-item disabled">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          {% endif %}
-          
-        </ul>
-      </nav>
-      <div class="d-flex justify-content-center">
-        <p class="fs-5 fw-lighter">Page {{ items.number }} of {{ items.paginator.num_pages }}</p>
-      </div>
-    </div>
-</div>
+  {% include 'pagination.html' %}
 
 {% endblock %}
