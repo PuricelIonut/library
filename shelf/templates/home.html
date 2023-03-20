@@ -97,8 +97,17 @@
         <h1 class="display-6">No books found matching your search terms...</h1>
         {% else %}
             {% for book in books %}
-                <a href="{% url 'book' pk=book.id %}"><div class="book" style="background-repeat: no-repeat;background-size: contain; background-image: url( {{book.image.url}} )">
-                </div></a>
+                <div class="book-wrapper border border-secondary rounded">
+                    <a href="{% url 'book' pk=book.id %}"><div class="book" style="background-repeat: no-repeat;background-size: contain; background-image: url( {{book.image.url}} )">
+                    </div></a>
+                    <h5 style="margin-left: 2.2rem;">{{ book.title }}</h5>
+                    <h5 style="margin-left: 2.2rem;">by {{ book.author }}</h5>
+                    <div class="book-price">
+                    <h5>${{ book.price }}</h5>
+                    <button type="button" class="btn btn-warning">Add to Cart</button>
+                    </div>
+                    
+                </div>
             {% endfor %}
         {% endif %}        
     </div>        

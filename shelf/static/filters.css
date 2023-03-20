@@ -23,16 +23,28 @@
 
 #books-container {
     display:flex;
+    background-color: red;
     justify-content: flex-start;
     align-content: flex-start;
     flex-wrap: wrap;
-    background-color: red;
     width: 100%;
     max-height: 90%;
     border-radius: 5px;
 
 }
 
+.book-wrapper {
+    background-color: purple;
+    height: 32rem;
+    margin: 0 1rem 1rem 0;
+}
+
+.book-price {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
 
 @media (max-width: 600px) {
     #content-container {
