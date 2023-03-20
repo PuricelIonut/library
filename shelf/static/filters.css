@@ -23,7 +23,7 @@
 
 #books-container {
     display:flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-content: flex-start;
     flex-wrap: wrap;
     background-color: red;
@@ -31,11 +31,6 @@
     max-height: 90%;
     border-radius: 5px;
 
-}
-
-#pages_nav {
-    justify-content: center;
-    align-items: flex-end;
 }
 
 

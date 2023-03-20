@@ -55,7 +55,7 @@
             <th scope="col">Title</th>
             <th scope="col" class="gx-1">Author</th>
             <th scope="col" class="col-sm-1">Quantity</th>
-            <th scope="col" class="col-sm-1">Price</th>
+            <th scope="col" class="col-sm-1">Price[$]</th>
             <th scope="col">Update Item</th>
             <th scope="col">Edit Item</th>
             <th scope="col">Delete Item</th>
@@ -72,7 +72,7 @@
                 <!-- QUICK UPDATE QTTY AND PRICE -->
                 <form class="d-flex" method='GET' action="{% url 'manager_quick_edit' pk=book.id %}">
                   <td><input type='number' class="form-control-sm" name="{{ book.id }}" placeholder="{{ book.quantity }}"> </td>
-                  <td><input type='number' step='.01' class="form-control-sm" name="{{ book.title }}" placeholder="${{ book.price }}"> </td>
+                  <td><input type='number' step='.01' class="form-control-sm" name="{{ book.title }}" placeholder="{{ book.price }}"> </td>
                   <td><button type="submit" class="btn btn-light" onclick="return confirm('Are you sure you entered the data corectly?');">Update</button> </td>
                 </form>
                 <!-- QUICK EDIT ITEM -->
