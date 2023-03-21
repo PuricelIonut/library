@@ -8,12 +8,11 @@ from django.core.paginator import Paginator
 
 from .forms import BookModelForm
 from .models import BookModel
-from .helpers import BookData
 
 
-# Import all books
+# Usefull variables
 books = BookModel.objects.all()
-
+number_of_pages = ['0-100', '100-200', '200-300', '300-500', '500-700', '700-900', '1000+']
 
 def home_view(request):
     p = Paginator(BookModel.objects.filter().order_by('id'), 10)
@@ -29,7 +28,7 @@ def home_view(request):
             "languages": books.values('language').distinct(),            
             "titles": books.values('title').distinct(),
             "authors": books.values('author').distinct(),
-            "pages": BookData.number_of_pages,
+            "pages": number_of_pages,
         },
     )
 
@@ -59,7 +58,7 @@ def filter_books_view(request, filter_type, filter_option):
             "languages": books.values('language').distinct(),            
             "titles": books.values('title').distinct(),
             "authors": books.values('author').distinct(),
-            "pages": BookData.number_of_pages,
+            "pages": number_of_pages,
             "fil_option": filter_option,
             "fil_type": filter_type,
         },
@@ -87,7 +86,7 @@ def search_books_view(request):
             "languages": books.values('language').distinct(),            
             "titles": books.values('title').distinct(),
             "authors": books.values('author').distinct(),
-            "pages": BookData.number_of_pages,
+            "pages": number_of_pages,
         },
     )
 
