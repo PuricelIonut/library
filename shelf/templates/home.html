@@ -41,7 +41,10 @@
                         {% else %}
                             <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="filter">
                         {% endif %}
-                        <a style='text-decoration: none;color: black;' href="{% url 'books_filter' filter_type='genre' filter_option=x.genre %}">{{ x.genre }}</a>
+                        <form method="get">
+                            <button type="submit" value="{{ x.genre }}">{{ x.genre }}</button>
+                        </form>
+                        {{ x.genre }}
                     </li>
                     {% endfor %}
                 </div>
@@ -62,7 +65,7 @@
                         {% else %}
                             <input class="form-check-input me-1" type="checkbox" value="" name="language">
                         {% endif %}
-                        <a style='text-decoration: none;color: black;' href="{% url 'books_filter' filter_type='language' filter_option=x.language %}">{{ x.language }}</a>
+                        <a style='text-decoration: none;color: black;' href="#">{{ x.language }}</a>
                     </li>
                     {% endfor %}
                 </div>
@@ -83,7 +86,7 @@
                                 {% else %}
                                 <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_100">
                                 {% endif %}
-                            <a style='text-decoration: none;color: black;' href="{% url 'books_filter' filter_type='pages' filter_option=x %}">{{ x }} pages</a>
+                            <a style='text-decoration: none;color: black;' href="#">{{ x }} pages</a>
                         </li>
                     {% endfor %}
                 </div>

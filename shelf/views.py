@@ -8,15 +8,24 @@ from django.core.paginator import Paginator
 
 from .forms import BookModelForm
 from .models import BookModel
-
+from .filters import BookFilter
 
 # Usefull variables
 books = BookModel.objects.all()
-number_of_pages = ['0-100', '100-200', '200-300', '300-500', '500-700', '700-900', '1000+']
+number_of_pages = [
+    "0-100",
+    "100-200",
+    "200-300",
+    "300-500",
+    "500-700",
+    "700-900",
+    "1000+",
+]
+
 
 def home_view(request):
-    p = Paginator(BookModel.objects.filter().order_by('id'), 10)
-    page = request.GET.get('page')
+    p = Paginator(BookModel.objects.filter().order_by("id"), 10)
+    page = request.GET.get("page")
     book_pages = p.get_page(page)
     return render(
         request,
@@ -24,43 +33,32 @@ def home_view(request):
         {
             "books": book_pages,
             "items": book_pages,
-            "genres": books.values('genre').distinct(),
-            "languages": books.values('language').distinct(),            
-            "titles": books.values('title').distinct(),
-            "authors": books.values('author').distinct(),
+            "genres": books.values("genre").distinct(),
+            "languages": books.values("language").distinct(),
+            "titles": books.values("title").distinct(),
+            "authors": books.values("author").distinct(),
             "pages": number_of_pages,
         },
     )
 
 
-def filter_books_view(request, filter_type, filter_option):
-    if filter_type == "genre":
-        filtered_results = BookModel.objects.filter(genre=filter_option)
-    elif filter_type == "language":
-        filtered_results = BookModel.objects.filter(language=filter_option)
-    elif filter_type == "pages":
-        if "-" in filter_option:
-            x = filter_option.split("-")
-            filtered_results = BookModel.objects.filter(
-                pages__range=[x[0], int(x[1]) + 1]
-            )
-        elif "+" in filter_option:
-            filtered_results = BookModel.objects.filter(pages__range=[1000, 9999])
-    p = Paginator(filtered_results, 10)
-    page = request.GET.get('page')
+def filter_books_view(request):
+    f = BookFilter(request.GET, queryset=books)
+
+    p = Paginator(f, 10)
+    page = request.GET.get("page")
     book_pages = p.get_page(page)
     return render(
         request,
         "home.html",
-        {   "items":book_pages,
-            "books": filtered_results,
-            "genres": books.values('genre').distinct(),
-            "languages": books.values('language').distinct(),            
-            "titles": books.values('title').distinct(),
-            "authors": books.values('author').distinct(),
+        {
+            "items": book_pages,
+            "books": f.qs,
+            "genres": books.values("genre").distinct(),
+            "languages": books.values("language").distinct(),
+            "titles": books.values("title").distinct(),
+            "authors": books.values("author").distinct(),
             "pages": number_of_pages,
-            "fil_option": filter_option,
-            "fil_type": filter_type,
         },
     )
 
@@ -74,7 +72,7 @@ def search_books_view(request):
         | Q(language__icontains=search_term)
     )
     p = Paginator(found_books, 10)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     book_pages = p.get_page(page)
     return render(
         request,
@@ -82,10 +80,10 @@ def search_books_view(request):
         {
             "items": book_pages,
             "books": found_books,
-            "genres": books.values('genre').distinct(),
-            "languages": books.values('language').distinct(),            
-            "titles": books.values('title').distinct(),
-            "authors": books.values('author').distinct(),
+            "genres": books.values("genre").distinct(),
+            "languages": books.values("language").distinct(),
+            "titles": books.values("title").distinct(),
+            "authors": books.values("author").distinct(),
             "pages": number_of_pages,
         },
     )
@@ -101,15 +99,15 @@ def book_view(request, pk):
 
 @login_required
 def manager_all(request):
-    p = Paginator(BookModel.objects.filter().order_by('id'), 20)
-    page = request.GET.get('page')
+    p = Paginator(BookModel.objects.filter().order_by("id"), 20)
+    page = request.GET.get("page")
     books = p.get_page(page)
-    search_id = request.GET.get('search')
+    search_id = request.GET.get("search")
     if request.user.is_staff or request.user.is_superuser:
-        return render(request, 'manager.html', {'items': books, 'search_id': search_id})
+        return render(request, "manager.html", {"items": books, "search_id": search_id})
     else:
-        return redirect('home')
-    
+        return redirect("home")
+
 
 @login_required
 def manager_item_edit(request, pk):
@@ -118,40 +116,38 @@ def manager_item_edit(request, pk):
     except:
         raise Http404()
     if request.user.is_staff or request.user.is_superuser:
-        if request.method == 'POST':
+        if request.method == "POST":
             form = BookModelForm(request.POST, instance=book)
             if form.is_valid():
                 form.save()
-                messages.success(
-                request, "Item succesfully modified!")
-                return redirect('manager_all')
+                messages.success(request, "Item succesfully modified!")
+                return redirect("manager_all")
             else:
                 messages.error(request, "Please fill all the fields correctly!")
         else:
             form = BookModelForm(instance=book)
-        return render(request, 'manager_item.html', {'book': book, 'form': form})
+        return render(request, "manager_item.html", {"book": book, "form": form})
     else:
-        return redirect('home')
+        return redirect("home")
 
 
 @login_required
 def manager_item_add(request):
     if request.user.is_staff or request.user.is_superuser:
-        if request.method == 'POST':
+        if request.method == "POST":
             form = BookModelForm(request.POST)
             if form.is_valid():
                 form.save()
-                messages.success(
-                request, "Item succesfully added!")
-                return redirect('manager_all')
+                messages.success(request, "Item succesfully added!")
+                return redirect("manager_all")
             else:
                 messages.error(request, "Please fill all the fields correctly!")
         else:
             form = BookModelForm()
-        return render(request, 'manager_item.html', {'form': form})
+        return render(request, "manager_item.html", {"form": form})
     else:
-        return redirect('home')
-    
+        return redirect("home")
+
 
 @login_required
 def manager_item_delete(request, pk):
@@ -160,12 +156,12 @@ def manager_item_delete(request, pk):
     except:
         raise Http404()
     book.delete()
-    messages.success(request, 'Item succesfully deleted!')
-    return redirect('manager_all')
+    messages.success(request, "Item succesfully deleted!")
+    return redirect("manager_all")
 
 
 def manager_item_search(request):
-    id = request.GET.get('item')
+    id = request.GET.get("item")
     return manager_item_edit(request, pk=id)
 
 
@@ -177,16 +173,38 @@ def manager_quick_edit(request, pk):
         if qty and not prc:
             obj.quantity = qty
             obj.save()
-            messages.success(request, mark_safe(f"<b>Quantity</b> succesfully modified for item: <br><b>ID: {obj.id}</b> <br><b>Title: {obj.title}</b>"))
+            messages.success(
+                request,
+                mark_safe(
+                    f"<b>Quantity</b> succesfully modified for item: <br><b>ID: {obj.id}</b> <br><b>Title: {obj.title}</b>"
+                ),
+            )
         elif prc and not qty:
             obj.price = prc
             obj.save()
-            messages.success(request, mark_safe(f"<b>Price</b> succesfully modified for item: <br><b>ID: {obj.id}</b> <br><b>Title: {obj.title}</b>"))
+            messages.success(
+                request,
+                mark_safe(
+                    f"<b>Price</b> succesfully modified for item: <br><b>ID: {obj.id}</b> <br><b>Title: {obj.title}</b>"
+                ),
+            )
         else:
             obj.quantity = qty
             obj.price = prc
             obj.save()
-            messages.success(request, mark_safe(f"<b>Quantity</b> and <b>Price</b> succesfully modified for item: <br><b>ID: {obj.id}</b> <br><b>Title: {obj.title}</b>"))  
+            messages.success(
+                request,
+                mark_safe(
+                    f"<b>Quantity</b> and <b>Price</b> succesfully modified for item: <br><b>ID: {obj.id}</b> <br><b>Title: {obj.title}</b>"
+                ),
+            )
     except:
-        messages.error(request, f"There was a problem processing your request.Please try again!")
-    return redirect('manager_all')
+        messages.error(
+            request, f"There was a problem processing your request.Please try again!"
+        )
+    return redirect("manager_all")
+
+
+def filter_all_books(request):
+    f = BookFilter(request.GET, queryset=books)
+    return render(request, "test.html", {"form": f.form, 'books': f.qs})
