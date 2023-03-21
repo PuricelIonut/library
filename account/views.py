@@ -217,3 +217,7 @@ def password_reset_confirm(request, uidb64, token):
     else:
         messages.error(request, mark_safe("Link <b>invalid</b> or <b>expired</b>."))
     return redirect("home")
+
+
+def account_management_view(request):
+    return render(request, 'account.html', {})
