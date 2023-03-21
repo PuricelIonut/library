@@ -50,8 +50,9 @@ INSTALLED_APPS = [
     'account',
     'shelf',
 
-    # Format
+    # Installed / Not default
     'crispy_forms',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
