@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <form method="get">
+        {{ form }}
+        <input type="submit" />
+    </form>
+    {% for obj in books %}
+        {{ obj.title }} by {{ obj.author }}<br />
+    {% endfor %}
+{% endblock %}
