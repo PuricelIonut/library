@@ -36,13 +36,13 @@
                 <div class="card card-body">
                     {% for x in genres %}
                     <li class="list-group-item">
+                        <form method="get" action="{% url 'books_filter' %}">
                         {% if x.genre in request.path %} 
-                            <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="filter" checked>
+                            <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="genre" checked>
                         {% else %}
-                            <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="filter">
+                            <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="genre">
                         {% endif %}
-                        <form method="get">
-                            <button type="submit" value="{{ x.genre }}">{{ x.genre }}</button>
+                            <button type="submit" value="Submit">Submit</button>
                         </form>
                         {{ x.genre }}
                     </li>
@@ -60,12 +60,15 @@
                 <div class="card card-body">
                     {% for x in languages %}
                     <li class="list-group-item">
+                        <form method="get" action="{% url 'books_filter' %}">
                         {% if x.language in request.path %} 
-                            <input class="form-check-input me-1" type="checkbox" value="" name="language" checked>
+                            <input class="form-check-input me-1" type="checkbox" value="{{ x.language }}" name="language" checked>
                         {% else %}
-                            <input class="form-check-input me-1" type="checkbox" value="" name="language">
+                            <input class="form-check-input me-1" type="checkbox" value="{{ x.language }}" name="language">
                         {% endif %}
-                        <a style='text-decoration: none;color: black;' href="#">{{ x.language }}</a>
+                        <button type="submit" value="Submit">Submit</button>
+                        </form>
+                        {{ x.language }}
                     </li>
                     {% endfor %}
                 </div>

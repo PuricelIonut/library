@@ -43,17 +43,26 @@ def home_view(request):
 
 
 def filter_books_view(request):
-    f = BookFilter(request.GET, queryset=books)
+    genre = request.GET.get("genre")
+    language = request.GET.get("language")
+    pages = request.GET.get('pages')
+    
+    qs = BookModel.objects.all()
+    if genre:
+        qs = qs.filter(genre__in=[genre])
+    if language:
+        qs = qs.filter(language__in=[language])  
 
-    p = Paginator(f, 10)
+    p = Paginator(qs, 10)
     page = request.GET.get("page")
     book_pages = p.get_page(page)
+
     return render(
         request,
         "home.html",
         {
             "items": book_pages,
-            "books": f.qs,
+            "books": qs,
             "genres": books.values("genre").distinct(),
             "languages": books.values("language").distinct(),
             "titles": books.values("title").distinct(),
@@ -204,7 +213,3 @@ def manager_quick_edit(request, pk):
         )
     return redirect("manager_all")
 
-
-def filter_all_books(request):
-    f = BookFilter(request.GET, queryset=books)
-    return render(request, "test.html", {"form": f.form, 'books': f.qs})
