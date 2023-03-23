@@ -36,15 +36,16 @@
                 <div class="card card-body">
                     {% for x in genres %}
                     <li class="list-group-item">
+                        
                         <form method="get" action="{% url 'books_filter' %}">
+                        
                         {% if x.genre in request.path %} 
                             <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="genre" checked>
                         {% else %}
                             <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="genre">
                         {% endif %}
-                            <button type="submit" value="Submit">Submit</button>
-                        </form>
                         {{ x.genre }}
+                    
                     </li>
                     {% endfor %}
                 </div>
@@ -59,16 +60,16 @@
             <div class="collapse" id="languages-collapse">
                 <div class="card card-body">
                     {% for x in languages %}
+                    
                     <li class="list-group-item">
-                        <form method="get" action="{% url 'books_filter' %}">
+                        
                         {% if x.language in request.path %} 
                             <input class="form-check-input me-1" type="checkbox" value="{{ x.language }}" name="language" checked>
                         {% else %}
                             <input class="form-check-input me-1" type="checkbox" value="{{ x.language }}" name="language">
                         {% endif %}
-                        <button type="submit" value="Submit">Submit</button>
-                        </form>
                         {{ x.language }}
+                    
                     </li>
                     {% endfor %}
                 </div>
@@ -83,17 +84,21 @@
             <div class="collapse" id="pages-collapse">
                 <div class="card card-body">
                     {% for x in pages %}
+                        
                         <li class="list-group-item">
-                                {% if x in request.path %}
-                                <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_100" checked>
-                                {% else %}
-                                <input class="form-check-input me-1" type="checkbox" value="" name="number_of_pages_100">
-                                {% endif %}
-                            <a style='text-decoration: none;color: black;' href="#">{{ x }} pages</a>
+                            {% if x in request.path %}
+                                <input class="form-check-input me-1" type="checkbox" value="{{ x }}" name="number_of_pages" checked>
+                            {% else %}
+                                <input class="form-check-input me-1" type="checkbox" value="{{ x }}" name="number_of_pages">
+                            {% endif %}
+                            {{ x }}
                         </li>
+                    
                     {% endfor %}
                 </div>
             </div>
+            <button type="submit" class="btn btn-outline-dark">Filter</button>
+            </form>
         </ul>
     </div>
 
@@ -109,10 +114,9 @@
                     <h5 style="margin-left: 2.2rem;">{{ book.title }}</h5>
                     <h5 style="margin-left: 2.2rem;">by {{ book.author }}</h5>
                     <div class="book-price">
-                    <h5>${{ book.price }}</h5>
-                    <button type="button" class="btn btn-warning">Add to Cart</button>
-                    </div>
-                    
+                        <h5>${{ book.price }}</h5>
+                        <button type="button" class="btn btn-warning">Add to Cart</button>
+                    </div> 
                 </div>
             {% endfor %}
         {% endif %}        

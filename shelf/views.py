@@ -8,7 +8,6 @@ from django.core.paginator import Paginator
 
 from .forms import BookModelForm
 from .models import BookModel
-from .filters import BookFilter
 
 # Usefull variables
 books = BookModel.objects.all()
@@ -49,9 +48,11 @@ def filter_books_view(request):
     
     qs = BookModel.objects.all()
     if genre:
-        qs = qs.filter(genre__in=[genre])
+        qs = qs.filter(genre=genre)
     if language:
-        qs = qs.filter(language__in=[language])  
+        qs = qs.filter(language=language)  
+    if pages:
+        qs = qs.filter(pages__in=pages)  
 
     p = Paginator(qs, 10)
     page = request.GET.get("page")
