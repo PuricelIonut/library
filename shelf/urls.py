@@ -8,6 +8,7 @@ urlpatterns = [
     path('shelf/book/<int:pk>/', views.book_view, name='book'),
     path('shelf/', views.search_books_view, name='search_books'),
     path('shelf/filter/', views.filter_books_view, name='books_filter'),
+    path('test/', views.test_filters, name='test'),
 
     # Book manager 
     path('shelf/manager/', views.manager_all, name='manager_all'),
