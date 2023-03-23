@@ -27,7 +27,30 @@
 <div id="content-container" class="container-fluid">
     <div id="filters-container" class="container-fluid">
         
-        <!-- Filter by genre -->
+        <!-- PRICE FILTER -->
+        <ul class="list-group">
+            <button class='btn btn-dark' type="button" data-bs-toggle="collapse" data-bs-target="#price-collapse" aria-expanded="false" aria-controls="collapseExample">
+                Price
+            </button>
+            <div class="collapse" id="price-collapse">
+                <div class="card card-body">
+                        <li class="list-group-item">
+                            <!-- FORM START HERE -->
+                            <form method="GET" action="{% url 'books_filter' %}">
+
+                            <div class="input-group mb-3">
+                                <input class="form-control" type="number" placeholder="min" name="price_min"> 
+                                <span class="input-group-text"><b>-</b></span>
+                                <input class="form-control" type="number" placeholder="max" name="price_max">
+                                <span class="input-group-text">$</span>
+
+                            </div>                              
+                        </li>
+                </div>
+            </div>
+        </ul>
+
+        <!-- GENRE FILTER  -->
         <ul class="list-group">
             <button class='btn btn-dark' type="button" data-bs-toggle="collapse" data-bs-target="#genres-collapse" aria-expanded="false" aria-controls="collapseExample">
                 Genres
@@ -36,9 +59,7 @@
                 <div class="card card-body">
                     {% for x in genres %}
                         <li class="list-group-item">
-                        
-                            <form method="GET" action="{% url 'books_filter' %}">
-    
+                            
                             {% if x.genre in request.path %} 
                                 <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="genre" checked>
                             {% else %}
@@ -53,7 +74,7 @@
             </div>
         </ul>
 
-        <!-- Filter by language -->
+        <!-- LANGUAGE FILTER -->
         <ul class="list-group">
             <button class='btn btn-dark' type="button" data-bs-toggle="collapse" data-bs-target="#languages-collapse" aria-expanded="false" aria-controls="collapseExample">
                 Languages
@@ -74,26 +95,25 @@
               </div>
         </ul>
 
-        <!-- Filter by number of pages -->
+        <!-- PAGES FILTER  -->
         <ul class="list-group">
             <button class='btn btn-dark' type="button" data-bs-toggle="collapse" data-bs-target="#pages-collapse" aria-expanded="false" aria-controls="collapseExample">
                 Number of pages
             </button>
             <div class="collapse" id="pages-collapse">
                 <div class="card card-body">
-                    {% for x in pages %}
                         <li class="list-group-item">
-                                {% if x in request.path %}
-                                <input class="form-check-input me-1" type="checkbox" value="{{ x }}" name="pages_num" checked>
-                                {% else %}
-                                <input class="form-check-input me-1" type="checkbox" value="{{ x }}" name="pages_num">
-                                {% endif %}
-                                {{ x }}
+                            <div class="input-group mb-1">
+                                <input class="form-control" type="number" placeholder="min" name="pages_min"> 
+                                <span class="input-group-text"><b>-</b></span>
+                                <input class="form-control" type="number" placeholder="max"name="pages_max">
+                            </div>                              
                         </li>
-                    {% endfor %}
                 </div>
             </div>
-            <button type="submit">Apply Filters</button>
+            <button type="submit" class="btn btn-secondary">Apply Filters</button>
+        
+        <!-- FORM ENDING -->
             </form>
         </ul>
     </div>

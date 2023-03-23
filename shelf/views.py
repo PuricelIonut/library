@@ -12,15 +12,6 @@ from .models import BookModel
 
 # Usefull variables
 books = BookModel.objects.all()
-number_of_pages = [
-    "0-100",
-    "100-200",
-    "200-300",
-    "300-500",
-    "500-700",
-    "700-900",
-    "1000+",
-]
 
 
 def home_view(request):
@@ -37,7 +28,6 @@ def home_view(request):
             "languages": books.values("language").distinct(),
             "titles": books.values("title").distinct(),
             "authors": books.values("author").distinct(),
-            "pages": number_of_pages,
         },
     )
 
@@ -45,8 +35,10 @@ def home_view(request):
 def filter_books_view(request):
     genre = request.GET.get('genre')
     language = request.GET.get('language')
-    price = request.GET.get('price')
-    pages = request.GET.get('pages_num')    
+    price_min = request.GET.get('price_min')
+    price_max = request.GET.get('price_max')
+    pages_min = request.GET.get('pages_min')    
+    pages_max = request.GET.get('pages_max')
     
     qs = BookModel.objects.all()
     
@@ -54,13 +46,12 @@ def filter_books_view(request):
         qs = qs.filter(genre__in = [genre])
     if language:
         qs = qs.filter(language__in = [language])
-    if pages:
-        if "-" in pages:
-            pages.split('-')
-            qs = qs.filter(pages__range = [pages[0], pages[1]])
-        elif '+' in pages:
-            qs = qs.filter(pages__range = [1000, 9999])
-    
+    if price_min and price_max:
+        qs = qs.filter(price__range = [price_min, price_max])       
+    if pages_min and pages_max:
+        qs = qs.filter(pages__range = [pages_min, pages_max])       
+
+
     p = Paginator(qs, 10)
     page = request.GET.get("page")
     book_pages = p.get_page(page)
@@ -69,12 +60,11 @@ def filter_books_view(request):
         request,
         "home.html",
         {   "items": book_pages,
-            "books": qs,
+            "books": qs.order_by('price'),
             "genres": books.values("genre").distinct(),
             "languages": books.values("language").distinct(),
             "titles": books.values("title").distinct(),
             "authors": books.values("author").distinct(),
-            "pages": number_of_pages,
         },
     )
 
@@ -95,12 +85,11 @@ def search_books_view(request):
         "home.html",
         {
             "items": book_pages,
-            "books": found_books,
+            "books": found_books.order_by('price'),
             "genres": books.values("genre").distinct(),
             "languages": books.values("language").distinct(),
             "titles": books.values("title").distinct(),
             "authors": books.values("author").distinct(),
-            "pages": number_of_pages,
         },
     )
 
