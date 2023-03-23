@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 
 from .forms import BookModelForm
 from .models import BookModel
-from .filters import BookFilter
+
 
 # Usefull variables
 books = BookModel.objects.all()
@@ -43,18 +43,33 @@ def home_view(request):
 
 
 def filter_books_view(request):
-    f = BookFilter(request.GET, queryset=BookModel.objects.all())
-
-    p = Paginator(f.qs, 10)
+    genre = request.GET.get('genre')
+    language = request.GET.get('language')
+    price = request.GET.get('price')
+    pages = request.GET.get('pages_num')    
+    
+    qs = BookModel.objects.all()
+    
+    if genre:
+        qs = qs.filter(genre__in = [genre])
+    if language:
+        qs = qs.filter(language__in = [language])
+    if pages:
+        if "-" in pages:
+            pages.split('-')
+            qs = qs.filter(pages__range = [pages[0], pages[1]])
+        elif '+' in pages:
+            qs = qs.filter(pages__range = [1000, 9999])
+    
+    p = Paginator(qs, 10)
     page = request.GET.get("page")
     book_pages = p.get_page(page)
 
     return render(
         request,
         "home.html",
-        {   'form': f.form,
-            "items": book_pages,
-            "books": f.qs,
+        {   "items": book_pages,
+            "books": qs,
             "genres": books.values("genre").distinct(),
             "languages": books.values("language").distinct(),
             "titles": books.values("title").distinct(),
@@ -205,7 +220,3 @@ def manager_quick_edit(request, pk):
         )
     return redirect("manager_all")
 
-
-def test_filters(request):
-    f = BookFilter(request.GET, queryset=BookModel.objects.all())
-    return render(request, 'test.html', {'books': f.qs, 'form':f.form})

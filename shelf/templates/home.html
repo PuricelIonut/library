@@ -37,20 +37,14 @@
                     {% for x in genres %}
                         <li class="list-group-item">
                         
-
-                            <form method="GET">
-                                {{ form.as_p }}
-                                <button type="submit">ASDASDSD</button>
-                            </form>
-
-
+                            <form method="GET" action="{% url 'books_filter' %}">
+    
                             {% if x.genre in request.path %} 
                                 <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="genre" checked>
                             {% else %}
                                 <input class="form-check-input me-1" type="checkbox" value="{{ x.genre }}" name="genre">
                             {% endif %}
                             {{ x.genre }}
-      
                         </li>
                     {% endfor %}
                         
@@ -90,14 +84,17 @@
                     {% for x in pages %}
                         <li class="list-group-item">
                                 {% if x in request.path %}
-                                <input class="form-check-input me-1" type="checkbox" value="{{ x }}" name="number_of_pages" checked>
+                                <input class="form-check-input me-1" type="checkbox" value="{{ x }}" name="pages_num" checked>
                                 {% else %}
-                                <input class="form-check-input me-1" type="checkbox" value="{{ x }}" name="number_of_pages">
+                                <input class="form-check-input me-1" type="checkbox" value="{{ x }}" name="pages_num">
                                 {% endif %}
+                                {{ x }}
                         </li>
                     {% endfor %}
                 </div>
             </div>
+            <button type="submit">Apply Filters</button>
+            </form>
         </ul>
     </div>
 
