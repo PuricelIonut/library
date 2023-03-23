@@ -48,13 +48,17 @@ def filter_books_view(request):
     
     qs = BookModel.objects.all()
     if genre:
-        qs = qs.filter(genre__in=genre)
+        qs = qs.filter(genre=genre)
     if language:
-        qs = qs.filter(language__in=language)  
+        qs = qs.filter(language=language)  
     if pages:
         if "-" in pages:
-            pages.split('-')
-            qs = qs.filter(pages__range=[pages[0], pages[1]])  
+            x = str(pages).split("-")
+            qs = qs.filter(
+                pages__range=[x[0], int(x[1]) + 1]
+            )
+        elif "+" in pages:
+            qs = qs.filter(pages__range=[1000, 9999])
 
     p = Paginator(qs, 10)
     page = request.GET.get("page")
