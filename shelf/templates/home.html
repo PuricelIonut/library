@@ -14,14 +14,12 @@
 
 <!-- Filter messages -->
 <hr>
-{% if books and fil_option != None %}
-    {% if fil_type != 'pages'%}
-    <h1 style="text-align: center;" class="display-6">Looking for: "{{ fil_option|lower }}" books...</h1>
-    {% else %}
-    <h1 style="text-align: center;" class="display-6">Looking for: "{{ fil_option|lower }} pages" books...</h1>
-    {% endif %}
+{% if filters_applied %}
+    <h1 style='text-align: center;' class="display-6">
+    Results for:
+    {% for x in filters_applied %}{{ x|lower }}{% endfor %}
+    books</h1>
 {% endif %}
-
 <link rel="stylesheet" href="{% static 'filters.css' %}">
 
 <div id="content-container" class="container-fluid">

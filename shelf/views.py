@@ -40,15 +40,28 @@ def filter_books_view(request):
     pages_min = request.GET.get('pages_min')    
     pages_max = request.GET.get('pages_max')
     
+    filters_applied = []
+
     qs = BookModel.objects.all()
     
     if genre:
+        filters_applied.append(genre + ', ')
         qs = qs.filter(genre__in = [genre])
+    
     if language:
+        filters_applied.append(language + ', ')
         qs = qs.filter(language__in = [language])
+    
     if price_min and price_max:
+        filters_applied.append(price_min + '-')
+        filters_applied.append(price_max + ' $,')
+
+
         qs = qs.filter(price__range = [price_min, price_max])       
+    
     if pages_min and pages_max:
+        filters_applied.append(pages_min + '-')
+        filters_applied.append(pages_max + ' pages,')
         qs = qs.filter(pages__range = [pages_min, pages_max])       
 
 
@@ -65,6 +78,7 @@ def filter_books_view(request):
             "languages": books.values("language").distinct(),
             "titles": books.values("title").distinct(),
             "authors": books.values("author").distinct(),
+            "filters_applied":filters_applied,
         },
     )
 
@@ -167,6 +181,9 @@ def manager_item_delete(request, pk):
 
 def manager_item_search(request):
     id = request.GET.get("item")
+    if not id.isnumeric():
+        temp = BookModel.objects.get(title=id)
+        id = temp.id
     return manager_item_edit(request, pk=id)
 
 

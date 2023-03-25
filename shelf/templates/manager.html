@@ -21,7 +21,7 @@
 
 <div id="searchbar-container" class="container-fluid">
     <form class="d-flex" role="search" method='GET' action="{% url 'manager_item_search' %}">
-        <input id="search_books" class="form-control me-2" type="search" name='item' placeholder="Search item by ID" aria-label="Search">
+        <input id="search_books" class="form-control me-2" type="search" name='item' placeholder="Search item by ID or Title" aria-label="Search">
         <button type="submit" class="btn btn-outline-dark">Search</button>
     </form>
 </div>
@@ -30,7 +30,7 @@
     $( function() {
       var availableTags = [
         {% for x in items %}
-            "{{ x.id }}",
+            "{{ x.id }}","{{ x.title }}",
         {% endfor %}
       ];
       $( "#search_books" ).autocomplete({
