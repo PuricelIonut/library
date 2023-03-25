@@ -39,7 +39,6 @@
                         {% endif %}
                         {% if user.is_authenticated %}
                         <h4><a href="{% url 'user_panel' %}">Account Management</a></h4>
-                        <h4><a href="{% url 'change_password' %}">Change Password</a></h4>
                         <h4><a href="{% url 'logout' %}">Logout</a></h4>
                         {% else %}
                         <h4><a href="{% url 'login' %}">Login</a></h4>

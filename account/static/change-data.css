@@ -1,9 +1,9 @@
-#change-pw-container {
+#change-data-container {
     margin-top: 3rem;
     width: 20%;
 }
 
-#change-pw-button {
+#change-data-button {
     display:flex;
     align-items: center;
     justify-content: center;
@@ -11,15 +11,15 @@
     width: 90%;
 }
 
-#change-pw-button {
+#change-data-button {
     max-width: 100%;
 }
 
 @media (max-width: 600px) {
-    #change-pw-button button {
+    #change-data-button button {
         width: 100%;
     }
-    #change-pw-container {
+    #change-data-container {
         width:60%;
     }
 }

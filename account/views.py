@@ -17,7 +17,7 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.safestring import mark_safe
 
 
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, UserInfoForm
 from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 
@@ -121,23 +121,6 @@ def login_view(request):
 
 
 @login_required
-def change_password_view(request):
-    user = request.user
-    if request.method == "POST":
-        form = PasswordChangeForm(user, request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(
-                request, "Password changed succesfully! Please login again."
-            )
-            return redirect("home")
-        else:
-            messages.error(request, "Invalid password")
-    form = PasswordChangeForm(user)
-    return render(request, "change-password.html", {"form": form})
-
-
-@login_required
 def logout_view(request):
     logout(request)
     return redirect("home")
@@ -220,4 +203,32 @@ def password_reset_confirm(request, uidb64, token):
 
 
 def account_management_view(request):
-    return render(request, 'account.html', {})
+    if request.method == "POST":
+        form_pw = PasswordChangeForm(request.user, request.POST)
+        form_info = UserInfoForm(data=request.POST, instance=request.user, empty_permitted=False)
+        if form_pw.has_changed():    
+            if form_pw.is_valid():
+                form_pw.save()
+                messages.success(
+                    request, "Password changed succesfully! Please login again."
+                )
+                return redirect("home")
+            else:
+                messages.error(request, "Invalid data! Make sure you fill all the fields correctly.")
+                return redirect('user_panel')
+        if form_info.has_changed(): 
+            if form_info.is_valid():
+                user = form_info.save(commit=False)
+                user.save()
+                messages.success(
+                    request, "Credentials updated succesfully!"
+                )
+                return redirect('home')
+            else:
+                messages.error(request, 'Invalid credentials!')
+                return redirect('user_panel')
+        messages.warning(request, 'No changes made!')
+
+    form_pw = PasswordChangeForm(request.user)
+    form_info = UserInfoForm(instance=request.user)
+    return render(request, 'account.html', {'pw_form':form_pw, 'info_form':form_info})
