@@ -23,7 +23,11 @@
             <h5 style="margin: 2rem 1rem 0 1rem;">Genre: {{ book.genre }}</h5>
             <h5 style="margin: 1rem 1rem 0 1rem;">Language: {{ book.language }}</h5>
             <h5 style="margin: 1rem 1rem 0 1rem;">Number of pages: {{ book.pages }}</h5>
+            <button data-product="{{book.id}}" data-action="add" type="button" class="btn btn-lg btn-warning update-cart">Add to Cart</button>
         </div>
     </div>
     <hr>
+
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+
 {% endblock %}

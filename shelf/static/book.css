@@ -20,6 +20,10 @@
     min-height: 100%;
 }
 
+#book-info button {
+    margin-top: 2rem;
+    margin-left: 1rem;
+}
 
 @media (max-width: 600px) {
     #book-data {

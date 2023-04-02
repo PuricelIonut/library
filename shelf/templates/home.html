@@ -129,7 +129,7 @@
                     <h5 style="margin-left: 2.2rem;">by {{ book.author }}</h5>
                     <div class="book-price">
                     <h5>${{ book.price }}</h5>
-                    <button type="button" class="btn btn-warning">Add to Cart</button>
+                    <button data-product="{{book.id}}" data-action="add" type="button" class="btn btn-warning update-cart">Add to Cart</button>
                     </div>
                     
                 </div>
@@ -139,6 +139,8 @@
 </div>
 <hr>
 
-  {% include 'pagination.html' %}
+{% include 'pagination.html' %}
+
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
 
 {% endblock %}
