@@ -232,3 +232,4 @@ def account_management_view(request):
     form_pw = PasswordChangeForm(request.user)
     form_info = UserInfoForm(instance=request.user)
     return render(request, 'account.html', {'pw_form':form_pw, 'info_form':form_info})
+

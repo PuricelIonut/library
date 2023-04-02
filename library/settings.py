@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # Created
     'account',
     'shelf',
+    'cart',
 
     # Installed / Not default
     'crispy_forms',

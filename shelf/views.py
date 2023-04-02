@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 
 from .forms import BookModelForm
 from .models import BookModel
-
+from cart.models import Order
 
 # Usefull variables
 books = BookModel.objects.all()
@@ -225,4 +225,3 @@ def manager_quick_edit(request, pk):
             request, f"There was a problem processing your request.Please try again!"
         )
     return redirect("manager_all")
-
