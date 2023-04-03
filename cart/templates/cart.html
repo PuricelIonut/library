@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Shopping Cart
+{% endblock %}
+
+{% block body %}
+
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Item</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+        <tr>
+        <th scope="row">Image here</th>
+        <td>{{ item.product.title }}</td>
+        <td>${{ item.product.price }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ item.get_total }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+    <div class="container-fluid">
+        <h1 class='display-6'>Items: {{ order.get_cart_items }}</h1>
+        <h1 class='display-6'>Total: ${{ order.get_cart_total }}</h1>
+    </div>
+{% endblock %}

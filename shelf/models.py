@@ -13,12 +13,4 @@ class BookModel(models.Model):
     description = models.TextField( max_length=5000 ,blank=True, null=False)
     image = models.ImageField(upload_to='shelf/files/book-covers/', default='shelf/files/default/default_cover.jpeg')
 
-    def add_stock(self, quantity_to_add: int):
-        return self.quantity + quantity_to_add
-
-    def remove_stock(self, quantity_to_remove: int):
-        if quantity_to_remove > self.quantity:
-            raise ValueError('Not enough stock!')
-        else:
-            return self.quantity - quantity_to_remove
         
