@@ -1,0 +1,13 @@
+#big-container {
+    width:80%;
+}
+
+#totals {
+    text-align: right;
+}
+
+@media (max-width: 600px) {
+    #big-container {
+        width:95%;
+    }
+}

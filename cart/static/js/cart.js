@@ -37,5 +37,8 @@ var updateBtns = document.getElementsByClassName('update-cart')
 
     .then((data) =>{
         console.log('data:', data)
+        setTimeout(function(){
+            window.location.reload();
+          });
     })
 }

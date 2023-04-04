@@ -4,16 +4,22 @@
 Shopping Cart
 {% endblock %}
 
+{% load static %}
+
 {% block body %}
 
+<link rel="stylesheet" href="{% static 'cart.css' %}">
+<br><br><br>
+<div class="container-fluid" id="big-container">
 
-<table class="table">
+<div class="table-responsive">
+  <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col">Image</th>
         <th scope="col">Item</th>
-        <th scope="col">Price</th>
         <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
         <th scope="col">Total</th>
       </tr>
     </thead>
@@ -22,16 +28,27 @@ Shopping Cart
         <tr>
         <th scope="row">Image here</th>
         <td>{{ item.product.title }}</td>
+        <td>
+         {{ item.quantity }} - 
+            <button data-product={{item.product.id}} data-action="add" type="button" class="btn btn-sm btn-outline-success update-cart"><i class="bi bi-arrow-up"></i></button>
+            <button data-product={{item.product.id}} data-action="remove" type="button" class="btn btn-sm btn-outline-danger update-cart"><i class="bi bi-arrow-down"></i></button>
+          </div> 
+        </td>
         <td>${{ item.product.price }}</td>
-        <td>{{ item.quantity }}</td>
         <td>${{ item.get_total }}</td>
       </tr>
     {% endfor %}
     </tbody>
   </table>
+  </div>
 
-    <div class="container-fluid">
-        <h1 class='display-6'>Items: {{ order.get_cart_items }}</h1>
-        <h1 class='display-6'>Total: ${{ order.get_cart_total }}</h1>
-    </div>
+  <div class="container-fluid" id="totals">
+    <h1 class='display-6'>Items: {{ order.get_cart_items }}</h1>
+    <h1 class='display-6'>Total: ${{ order.get_cart_total }}</h1>
+  </div>
+
+  </div>
+
+  <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+
 {% endblock %}

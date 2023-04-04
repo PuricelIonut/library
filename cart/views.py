@@ -16,6 +16,7 @@ def cart(request):
         items = []
     return render(request, 'cart.html', {'items':items, 'order':order})
 
+
 def update_item(request):
     data = json.loads(request.body)
     productId = data['productId']
