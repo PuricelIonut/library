@@ -6,6 +6,7 @@
     text-align: right;
 }
 
+
 @media (max-width: 600px) {
     #big-container {
         width:95%;

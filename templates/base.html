@@ -41,11 +41,16 @@
             <a class="navbar-brand" href="/"><b>Library</b></a>
             
             <!-- CART BUTTON -->
-            <a href="{% url 'cart' %}">
-            <button class="btn btn-primary" type="button">
-                <i class="bi bi-basket3"></i>  
-            </button>
-            </a>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a href="{% url 'cart' %}">
+                        <button class="btn btn-outline-dark" type="button">
+                            <i class="bi bi-cart"></i> 
+                        </button>
+                    </a>               
+                </li>
+              
+           
 
             <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDark" aria-controls="offcanvasDark">    
                 <span class="navbar-toggler-icon"></span>
@@ -65,6 +70,7 @@
                     <link rel="stylesheet" href="{% static 'base.css' %}">
 
                     <div class="offcanvas-items">
+                        <h4><a href="{% url 'cart' %}">Shopping Cart</a></h4>
                         {% if user.is_staff or user.is_superuser %}
                         <h4><a href="{% url 'manager_all' %}">Books Manager</a></h4>
                         {% endif %}
