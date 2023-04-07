@@ -6,7 +6,7 @@ import json
 
 from shelf.models import BookModel
 from cart.models import Order, OrderItem
-
+from .helpers import cookie_guest_cart, get_total_quantity
 
 
 def cart(request):
@@ -15,24 +15,12 @@ def cart(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
     else:
-        items = []
+        cookie_data = cookie_guest_cart(request)
+        items = cookie_data['items']
+        order = cookie_data['order']
+
     return render(request, 'cart.html', {'items':items, 'order':order, "cart_items": get_total_quantity(request),
 })
-
-
-def get_total_quantity(request):
-    if request.user.is_authenticated:
-        customer = request.user
-        order = Order.objects.get(customer=customer, complete=False)
-        order_items = OrderItem.objects.filter(order=order)
-        total_quantity = 0
-        for x in order_items:
-            total_quantity += x.quantity
-        if total_quantity == 0:
-            return ''
-        return total_quantity
-    else:
-        return ''
 
 
 def update_item(request):

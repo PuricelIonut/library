@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 
 from .forms import BookModelForm
 from .models import BookModel
-from cart.views import get_total_quantity
+from cart.helpers import get_total_quantity
 
 
 # Usefull variables

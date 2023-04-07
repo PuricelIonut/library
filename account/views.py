@@ -20,7 +20,8 @@ from django.utils.safestring import mark_safe
 from .forms import UserRegisterForm, UserInfoForm
 from .decorators import user_not_authenticated
 from .tokens import account_activation_token
-from cart.views import get_total_quantity
+from cart.helpers import get_total_quantity
+
 
 @user_not_authenticated
 def register_view(request):
@@ -40,7 +41,7 @@ def register_view(request):
                 ),
             )
     form = UserRegisterForm()
-    return render(request, "register.html", {"register_form": form})
+    return render(request, "register.html", {"register_form": form, "cart_items": get_total_quantity(request)} )
 
 
 def activate_email(request, user, to_email):
@@ -117,7 +118,7 @@ def login_view(request):
         else:
             messages.error(request, f"Invalid username or password")
     form = AuthenticationForm()
-    return render(request, "login.html", {"login_form": form})
+    return render(request, "login.html", {"login_form": form , "cart_items": get_total_quantity(request)})
 
 
 @login_required
@@ -166,7 +167,7 @@ def password_reset_view(request):
                     request, "The email provided does not match an active user."
                 )
     form = PasswordResetForm()
-    return render(request, "reset-password.html", {"form": form})
+    return render(request, "reset-password.html", {"form": form , "cart_items": get_total_quantity(request)})
 
 
 def password_reset_confirm(request, uidb64, token):

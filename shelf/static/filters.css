@@ -1,18 +1,15 @@
 #content-container {
     display: flex;
-    background-color: blue;
     width: 100%;
 }
 
 #filters-container {
-    background-color: green;
     width:20rem;
     margin: 1rem;
     border-radius: 5px;
 }
 
 .book {
-    background-color: pink;
     width:15rem;
     height:23rem;
     margin: 1rem;
@@ -23,7 +20,6 @@
 
 #books-container {
     display:flex;
-    background-color: red;
     justify-content: flex-start;
     align-content: flex-start;
     flex-wrap: wrap;
@@ -34,7 +30,6 @@
 }
 
 .book-wrapper {
-    background-color: purple;
     height: 32rem;
     margin: 0 1rem 1rem 0;
 }
