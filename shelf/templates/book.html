@@ -8,7 +8,8 @@
 
 {% block body %}
 <link rel="stylesheet" href="{% static 'book.css' %}">
-    
+{% include 'messages.html' %}
+   
     <hr>
     <div id="book-data" class="container-fluid">
         <div style="background-repeat: no-repeat;background-size: contain; background-image: url( {{ book.image.url }} )" id="book-image" class="container-fluid"></div>

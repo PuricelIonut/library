@@ -8,10 +8,11 @@ from django.core.paginator import Paginator
 
 from .forms import BookModelForm
 from .models import BookModel
+from cart.views import get_total_quantity
+
 
 # Usefull variables
 books = BookModel.objects.all()
-
 
 def home_view(request):
     p = Paginator(BookModel.objects.filter().order_by("id"), 10)
@@ -27,6 +28,7 @@ def home_view(request):
             "languages": books.values("language").distinct(),
             "titles": books.values("title").distinct(),
             "authors": books.values("author").distinct(),
+            "cart_items": get_total_quantity(request),
         },
     )
 
@@ -78,6 +80,7 @@ def filter_books_view(request):
             "titles": books.values("title").distinct(),
             "authors": books.values("author").distinct(),
             "filters_applied":filters_applied,
+            "cart_items": get_total_quantity(request),
         },
     )
 
@@ -103,6 +106,8 @@ def search_books_view(request):
             "languages": books.values("language").distinct(),
             "titles": books.values("title").distinct(),
             "authors": books.values("author").distinct(),
+            "cart_items": get_total_quantity(request),
+
         },
     )
 
@@ -112,7 +117,8 @@ def book_view(request, pk):
         book = BookModel.objects.get(id=pk)
     except:
         raise Http404()
-    return render(request, "book.html", {"book": book})
+    return render(request, "book.html", {"book": book, "cart_items": get_total_quantity(request),
+})
 
 
 @login_required

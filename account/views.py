@@ -20,7 +20,7 @@ from django.utils.safestring import mark_safe
 from .forms import UserRegisterForm, UserInfoForm
 from .decorators import user_not_authenticated
 from .tokens import account_activation_token
-
+from cart.views import get_total_quantity
 
 @user_not_authenticated
 def register_view(request):
@@ -231,5 +231,6 @@ def account_management_view(request):
 
     form_pw = PasswordChangeForm(request.user)
     form_info = UserInfoForm(instance=request.user)
-    return render(request, 'account.html', {'pw_form':form_pw, 'info_form':form_info})
+    return render(request, 'account.html', {'pw_form':form_pw, 'info_form':form_info, "cart_items": get_total_quantity(request),
+})
 
