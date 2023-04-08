@@ -6,9 +6,38 @@
     text-align: right;
 }
 
+#table-img {
+    height:10rem;
+    width:7rem;
+}
 
 @media (max-width: 600px) {
     #big-container {
-        width:95%;
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-y: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #ddd;
+    }
+    #big-container > .table {
+        margin-bottom: 0;
+    }
+    #big-container > .table > thead > tr > th,
+    #big-container > .table > tbody > tr > th,
+    #big-container > .table > tfoot > tr > th,
+    #big-container > .table > thead > tr > td,
+    #big-container> .table > tbody > tr > td,
+    #big-container > .table > tfoot > tr > td {
+        white-space: nowrap;
+    }
+    #table-img {
+        height: 5rem;
+        width: 3rem;
+    }
+    .table-text {
+        font-size: 0.8rem;
+    }
+    .table th {
+        font-size: 0.7rem;
     }
 }

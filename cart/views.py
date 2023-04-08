@@ -42,7 +42,7 @@ def update_item(request):
         messages.success(request, mark_safe('Item <b>added</b> to shopping cart succesfully!'))
     elif action == 'remove':
         orderItem.quantity = (orderItem.quantity - 1)
-        messages.success(request, mark_safe('Item <b>removed</b> from the shopping cart succesfully!'))
+        messages.warning(request, mark_safe('Item <b>removed</b> from the shopping cart succesfully!'))
 
 
     orderItem.save()

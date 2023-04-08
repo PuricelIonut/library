@@ -15,8 +15,7 @@ Shopping Cart
 <br><br><br>
 <div class="container-fluid" id="big-container">
 
-<div class="table-responsive">
-  <table class="table table-hover">
+<table class="table table-hover">
     <thead class="thead">
       <tr class="table-dark text-center">
         <th scope="col">Item</th>
@@ -31,24 +30,23 @@ Shopping Cart
         <tr class="text-center">
         <th scope="row">
           <a href="{% url 'book' pk=item.product.id %}">
-            <img style="height:10rem;width:7rem;" src="{{item.product.image.url}}">
+            <img id='table-img' src="{{item.product.image.url}}">
           </a>
         </th>
-        <td><h4>{{ item.product.title }}</h4></td>
+        <td><h4 class="table-text" >{{ item.product.title }}</h4></td>
         <td>
-         <h5>{{ item.quantity }} -
+         <h5 class="table-text">{{ item.quantity }} -
             <button data-product={{item.product.id}} data-action="add" type="button" class="btn btn-sm btn-outline-success update-cart"><i class="bi bi-arrow-up"></i></button>
             <button data-product={{item.product.id}} data-action="remove" type="button" class="btn btn-sm btn-outline-danger update-cart"><i class="bi bi-arrow-down"></i></button>
           </h5> 
           </div> 
         </td>
-        <td><h5>${{ item.product.price }}</h5></td>
-        <td><h5>${{ item.get_total }}</h5></td>
+        <td><h5 class="table-text">${{ item.product.price }}</h5></td>
+        <td><h5 class="table-text">${{ item.get_total }}</h5></td>
       </tr>
     {% endfor %}
     </tbody>
   </table>
-  </div>
 
   <div class="container-fluid" id="totals">
     <h1 class='display-6'>Items: {{ order.get_cart_items }}</h1>
