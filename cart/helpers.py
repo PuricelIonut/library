@@ -40,7 +40,7 @@ def cookie_guest_cart(request):
 def get_total_quantity(request):
     if request.user.is_authenticated:
         customer = request.user
-        order = Order.objects.get(customer=customer, complete=False)
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
         cartItems = order.get_cart_items
     else:
         try:
@@ -48,7 +48,10 @@ def get_total_quantity(request):
         except:
             cart = {}
         order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
-        cartItems = order['get_cart_items']
+        try:
+            cartItems = order['get_cart_items']
+        except:
+            cartItems = created['get_cart_items']
         for i in cart:
             cartItems += cart[i]['quantity']
     
